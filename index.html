@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Calculator Pro</title>
-    <link rel="icon" href="appicon.png">
-    <link rel="apple-touch-icon" href="appicon.png">
+    <title>Pro Calculator</title>
+    <link rel="icon" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -18,7 +18,7 @@
 
         <div class="tools-bar">
             <button class="tool-btn" id="history-btn">🕒 History</button>
-            <button class="tool-btn backspace" data-val="←">⌫</button>
+            <button class="tool-btn" id="backspace-btn" data-val="←">⌫</button>
         </div>
 
         <div class="buttons">
@@ -47,16 +47,16 @@
             <button class="btn num">.</button>
             <button class="btn equals">=</button>
         </div>
-
-        <div id="history-panel" class="hidden">
-            <div class="panel-header">
-                <span>Calculation History</span>
-                <button id="close-history">✕</button>
-            </div>
-            <div id="history-list"></div>
-            <button id="clear-history">Clear History</button>
-        </div>
     </div>
+
+    <div id="history-panel">
+        <div style="display:flex; justify-content:space-between; color:white; margin-bottom:20px;">
+            <span>History</span>
+            <button onclick="document.getElementById('history-panel').style.display='none'" style="color:red; background:none; border:none; font-size:1.5rem;">✕</button>
+        </div>
+        <div id="history-list" style="flex:1; overflow-y:auto; color:white;"></div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,11 +1,15 @@
 {
-    "name": "Universal Calculator",
+    "name": "Pro Calculator",
+    "short_name": "Calculator",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#000000",
     "icons": [
         {
-            "src": "appicon.png",
+            "src": "icon.png",
             "sizes": "512x512",
             "type": "image/png"
         }
-    ],
-    "display": "standalone"
+    ]
 }
