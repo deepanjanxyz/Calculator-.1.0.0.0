@@ -1,39 +1,40 @@
 const display = document.getElementById('display');
 const liveResult = document.getElementById('live-result');
 const body = document.body;
-
-// সেটিংস এলিমেন্ট
 const settingsPanel = document.getElementById('settings-panel');
+const historyPanel = document.getElementById('history-panel');
 const brightnessOverlay = document.getElementById('brightness-overlay');
 
-// ডেটা লোড
 let history = JSON.parse(localStorage.getItem('calcHistory')) || [];
 
-// সেটিংস ওপেন/ক্লোজ
+// সেটিংস হ্যান্ডলিং
 document.getElementById('settingsBtn').onclick = () => settingsPanel.classList.remove('hidden');
 document.querySelectorAll('.close-btn').forEach(btn => {
     btn.onclick = () => {
         settingsPanel.classList.add('hidden');
-        document.getElementById('history-panel').classList.add('hidden');
+        historyPanel.classList.add('hidden');
     }
 });
 
-// থিম পরিবর্তন
+// থিম ফিক্স
 document.getElementById('themeSelect').onchange = (e) => {
     body.className = e.target.value + '-mode';
 };
 
-// ব্রাইটনেস পরিবর্তন
+// ব্রাইটনেস লজিক ফিক্স (স্লাইডার বাড়ালে স্ক্রিন পরিষ্কার হবে)
 document.getElementById('brightnessRange').oninput = (e) => {
-    brightnessOverlay.style.opacity = e.target.value;
+    // স্লাইডার ভ্যালু ০ (অন্ধকার) থেকে ০.৮ (উজ্জ্বল)
+    // আমরা অপাসিটি উল্টো করে দেব: ১ - ভ্যালু
+    const val = parseFloat(e.target.value);
+    brightnessOverlay.style.opacity = 0.8 - val;
 };
 
-// বাটন কালার পরিবর্তন
+// কালার পিকার
 document.getElementById('colorPicker').oninput = (e) => {
     document.documentElement.style.setProperty('--primary-color', e.target.value);
 };
 
-// বাকি ক্যালকুলেটর লজিক (আগের মতোই)
+// ক্যালকুলেশন লজিক
 document.querySelectorAll('.button').forEach(button => {
     button.addEventListener('click', (e) => handleInput(e.target.textContent));
 });
@@ -52,7 +53,7 @@ function handleInput(value) {
         updateLiveResult();
     }
     else {
-        if (display.textContent === '0') display.textContent = value;
+        if (display.textContent === '0' || display.textContent === 'Error') display.textContent = value;
         else display.textContent += value;
         updateLiveResult();
     }
@@ -60,7 +61,10 @@ function handleInput(value) {
 
 function updateLiveResult() {
     try {
-        let text = display.textContent.replace(/×/g, '*').replace(/÷/g, '/').replace(/\^/g, '**').replace(/√/g, 'Math.sqrt');
+        let text = display.textContent.replace(/×/g, '*').replace(/÷/g, '/').replace(/\^/g, '**');
+        if (text.includes('√')) {
+            text = text.replace(/√(\d+(\.\d+)?)/g, 'Math.sqrt()');
+        }
         let res = eval(text);
         if (res !== undefined) liveResult.textContent = Number.isInteger(res) ? res : res.toFixed(4);
     } catch { liveResult.textContent = ''; }
@@ -73,6 +77,12 @@ function saveHistory(expr, res) {
 
 document.getElementById('historyBtn').onclick = () => {
     const list = document.getElementById('history-list');
-    list.innerHTML = history.map(h => `<div class="history-item">${h.expr} = ${h.res}</div>`).join('');
-    document.getElementById('history-panel').classList.remove('hidden');
+    list.innerHTML = history.map(h => `<div class="history-item"><div>${h.expr}</div><div style="color:var(--primary-color)">= ${h.res}</div></div>`).join('');
+    historyPanel.classList.remove('hidden');
+};
+
+document.getElementById('clearHistory').onclick = () => {
+    history = [];
+    localStorage.removeItem('calcHistory');
+    document.getElementById('history-list').innerHTML = '';
 };
