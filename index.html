@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="icon.png">
 </head>
-<body class="dark-mode"> <div id="app-overlay" style="background: rgba(0,0,0,0); pointer-events: none; position: fixed; top:0; left:0; width:100%; height:100%; z-index:9999;"></div>
-    
+<body class="dark-mode">
+    <div id="app-overlay"></div>
     <div class="container">
         <div class="top-nav">
             <button class="nav-btn" onclick="toggleScreen('history-screen')">🕒 History</button>
@@ -41,40 +41,25 @@
             <button class="btn num" onclick="handleInput('3')">3</button>
             <button class="btn func" onclick="handleInput('+')">+</button>
 
-            <button class="btn num" onclick="handleInput('%')">%</button>
+            <button class="btn equals" onclick="handleInput('=')">=</button>
             <button class="btn num zero-btn" onclick="handleInput('0')">0</button>
             <button class="btn num" onclick="handleInput('.')">.</button>
-            <button class="btn equals" onclick="handleInput('=')">=</button>
+            <button class="btn opt backspace-btn" onclick="handleInput('←')">⌫</button>
         </div>
     </div>
-
+    
     <div id="settings-screen" class="screen hidden">
-        <div class="screen-header">
-            <button onclick="toggleScreen('settings-screen')">⬅ Back</button>
-            <h2>Settings</h2>
-        </div>
+        <div class="screen-header"><button onclick="toggleScreen('settings-screen')">⬅ Back</button><h2>Settings</h2></div>
         <div class="settings-content">
-            <div class="setting-item">
-                <label>Theme Mode</label>
-                <select id="theme-select" onchange="changeTheme(this.value)">
-                    <option value="dark">Dark Mode</option>
-                    <option value="light">Light Mode</option>
-                </select>
-            </div>
-            <div class="setting-item">
-                <label>Brightness</label>
-                <input type="range" id="brightness-slider" min="10" max="100" value="100" oninput="updateBrightness(this.value)">
-            </div>
+            <div class="setting-item"><label>Theme</label><select id="theme-select" onchange="changeTheme(this.value)"><option value="dark">Dark</option><option value="light">Light</option></select></div>
+            <div class="setting-item"><label>Brightness</label><input type="range" id="brightness-slider" min="10" max="100" value="100" oninput="updateBrightness(this.value)"></div>
         </div>
     </div>
 
     <div id="history-screen" class="screen hidden">
-        <div class="screen-header">
-            <button onclick="toggleScreen('history-screen')">⬅ Back</button>
-            <h2>History</h2>
-        </div>
+        <div class="screen-header"><button onclick="toggleScreen('history-screen')">⬅ Back</button><h2>History</h2></div>
         <div id="history-list" class="content-list"></div>
-        <button class="clear-btn" onclick="clearHistory()">Clear All</button>
+        <button class="clear-btn" onclick="clearHistory()">Clear History</button>
     </div>
 
     <script src="script.js"></script>

@@ -6,45 +6,44 @@
     --text-white: #ffffff;
 }
 
-.light-mode {
-    --bg-dark: #f2f2f7;
-    --btn-num: #ffffff;
-    --btn-func: #ff9f0a;
-    --btn-opt: #d1d1d6;
-    --text-white: #000000;
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+body { margin: 0; font-family: sans-serif; background: var(--bg-dark); color: var(--text-white); height: 100vh; overflow: hidden; }
+
+.container { height: 100%; display: flex; flex-direction: column; padding: 20px; }
+.top-nav { display: flex; justify-content: space-between; padding-bottom: 10px; }
+.nav-btn { background: none; border: none; color: var(--btn-func); font-size: 1.1rem; }
+
+.display-area { flex: 0 0 25%; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; }
+#display { font-size: 4.5rem; }
+#live-result { font-size: 1.8rem; color: #888; height: 35px; }
+
+.buttons-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 12px; 
+    flex: 1;
 }
-
-body { margin: 0; font-family: -apple-system, sans-serif; background: var(--bg-dark); color: var(--text-white); transition: 0.3s; overflow: hidden; }
-
-.container { height: 100vh; display: flex; flex-direction: column; padding: 20px; }
-
-.top-nav { display: flex; justify-content: space-between; padding: 10px 0; }
-.nav-btn { background: none; border: none; color: var(--btn-func); font-size: 1rem; cursor: pointer; }
-
-.display-area { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; padding: 20px 0; }
-#display { font-size: 4rem; text-align: right; width: 100%; overflow-x: auto; }
-#live-result { font-size: 1.5rem; color: #888; height: 30px; }
-
-.buttons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
 
 .btn {
-    height: 70px; border: none; border-radius: 50%; font-size: 1.8rem;
-    background: var(--btn-num); color: var(--text-white);
+    border: none; border-radius: 40px; font-size: 1.8rem;
+    background: var(--btn-num); color: white;
     display: flex; align-items: center; justify-content: center;
-    transition: transform 0.1s; position: relative; overflow: hidden;
+    transition: 0.1s;
 }
 
-/* রিপল এফেক্ট */
-.btn:active { transform: scale(0.95); background: #555; }
+.btn:active { background: #555; transform: scale(0.95); }
 
-.zero-btn { grid-column: span 2; border-radius: 50px; justify-content: flex-start; padding-left: 25px; }
-.func, .equals { background: var(--btn-func); color: white; border-radius: 50px; }
+/* বাটন সাইজ ফিক্স */
+.equals { background: var(--btn-func); border-radius: 40px; }
+.zero-btn { background: var(--btn-num); }
+.backspace-btn { color: #ff453a; }
+
+/* স্পেশাল রুলস */
 .opt { background: var(--btn-opt); }
+.func { background: var(--btn-func); }
 
-/* Screens (Settings/History) */
+/* ওভারলে (ব্রাইটনেস) */
+#app-overlay { pointer-events: none; position: fixed; top:0; left:0; width:100%; height:100%; z-index:9999; }
+
 .screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 1000; padding: 20px; display: flex; flex-direction: column; }
 .hidden { display: none; }
-.screen-header { display: flex; align-items: center; gap: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-.setting-item { margin: 25px 0; display: flex; justify-content: space-between; align-items: center; }
-input[type="range"] { width: 60%; }
-.history-item { padding: 15px; border-bottom: 1px solid #333; text-align: right; }
