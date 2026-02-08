@@ -1,57 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Pro Calc Elite Max</title>
+    <title>Elite Calc Max</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="icon.png">
 </head>
 <body class="dark-mode">
     <div id="app-overlay"></div>
+    
     <div class="container">
         <div class="top-nav">
-            <button class="nav-btn" onclick="toggleScreen('history-screen')">🕒 হিস্ট্রি</button>
-            <div class="mode-title">PRO MODE</div>
-            <button class="nav-btn" onclick="toggleScreen('settings-screen')">⚙️ সেটিংস</button>
+            <button class="nav-btn" onclick="toggleScreen('history-screen')">🕒 History</button>
+            <button class="nav-btn" onclick="toggleScreen('settings-screen')">⚙️ Settings</button>
         </div>
 
         <div class="display-area">
-            <div id="formula-preview"></div>
             <div id="display">0</div>
             <div id="live-result"></div>
         </div>
 
-        <div class="sci-controls">
-            <button class="sci-btn" onclick="handleSci('sin')">sin</button>
-            <button class="sci-btn" onclick="handleSci('cos')">cos</button>
-            <button class="sci-btn" onclick="handleSci('tan')">tan</button>
-            <button class="sci-btn" onclick="handleSci('sqrt')">√</button>
-            <button class="sci-btn" onclick="handleSci('pow')">xʸ</button>
-        </div>
-
         <div class="buttons-grid">
             <button class="btn opt" onclick="handleInput('C')">AC</button>
-            <button class="btn opt" onclick="handleInput('(')">(</button>
-            <button class="btn opt" onclick="handleInput(')')">)</button>
-            <button class="btn func" onclick="handleInput('/')">÷</button>
+            <button class="btn opt" onclick="handleInput('%')">%</button>
+            <button class="btn opt" onclick="handleInput('÷')">÷</button>
+            <button class="btn func" onclick="handleInput('×')">×</button>
 
             <button class="btn num" onclick="handleInput('7')">7</button>
             <button class="btn num" onclick="handleInput('8')">8</button>
             <button class="btn num" onclick="handleInput('9')">9</button>
-            <button class="btn func" onclick="handleInput('*')">×</button>
+            <button class="btn func" onclick="handleInput('-')">−</button>
 
             <button class="btn num" onclick="handleInput('4')">4</button>
             <button class="btn num" onclick="handleInput('5')">5</button>
             <button class="btn num" onclick="handleInput('6')">6</button>
-            <button class="btn func" onclick="handleInput('-')">−</button>
+            <button class="btn func" onclick="handleInput('+')">+</button>
 
             <button class="btn num" onclick="handleInput('1')">1</button>
             <button class="btn num" onclick="handleInput('2')">2</button>
             <button class="btn num" onclick="handleInput('3')">3</button>
-            <button class="btn func" onclick="handleInput('+')">+</button>
-
+            
             <button class="btn equals" onclick="handleInput('=')">=</button>
+
             <button class="btn num zero-btn" onclick="handleInput('0')">0</button>
             <button class="btn num" onclick="handleInput('.')">.</button>
             <button class="btn opt backspace-btn" onclick="handleInput('←')">⌫</button>
@@ -59,35 +50,14 @@
     </div>
 
     <div id="settings-screen" class="screen hidden">
-        <div class="screen-header">
-            <button onclick="toggleScreen('settings-screen')">⬅ ফিরে যান</button>
-            <h2>প্রিমিয়াম সেটিংস</h2>
-        </div>
-        <div class="settings-content">
-            <div class="setting-item">
-                <label>ডার্ক মোড</label>
-                <div class="toggle-switch">
-                    <input type="checkbox" id="theme-toggle" checked onchange="toggleTheme()">
-                </div>
-            </div>
-            <div class="setting-item">
-                <label>ব্রাইটনেস কন্ট্রোল</label>
-                <input type="range" id="brightness-slider" min="10" max="100" value="100" oninput="updateBrightness(this.value)">
-            </div>
-            <div class="setting-item">
-                <label>বাটন এনিমেশন</label>
-                <select id="anim-select">
-                    <option value="bounce">Bounce</option>
-                    <option value="glow">Neon Glow</option>
-                </select>
-            </div>
-        </div>
+        <div class="screen-header"><button onclick="toggleScreen('settings-screen')">⬅ Back</button><h2>Settings</h2></div>
+        <div class="setting-item"><label>Brightness</label><input type="range" min="10" max="100" value="100" oninput="updateBrightness(this.value)"></div>
     </div>
 
     <div id="history-screen" class="screen hidden">
-        <div class="screen-header"><button onclick="toggleScreen('history-screen')">⬅ ব্যাক</button><h2>হিস্ট্রি লগ</h2></div>
+        <div class="screen-header"><button onclick="toggleScreen('history-screen')">⬅ Back</button><h2>History</h2></div>
         <div id="history-list"></div>
-        <button class="clear-btn" onclick="clearHistory()">সব মুছুন</button>
+        <button class="clear-btn" onclick="clearHistory()">Clear All</button>
     </div>
 
     <script src="script.js"></script>
