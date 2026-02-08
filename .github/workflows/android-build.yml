@@ -27,21 +27,21 @@ jobs:
       run: |
         mkdir -p www
         cp index.html style.css script.js manifest.json sw.js www/ 2>/dev/null || true
-        # package.json না থাকলে npm install এরর দেয়, তাই একটা ডামি ফাইল বানানো
         if [ ! -f package.json ]; then
           npm init -y
         fi
 
-    - name: Install Capacitor
+    - name: Install Dependencies
       run: npm install @capacitor/cli @capacitor/core @capacitor/android
 
-    - name: Initialize and Build
+    - name: Initialize and Fix Kotlin Conflict
       run: |
         npx cap init Calculator com.deepanjan.calculator --web-dir www
         npx cap add android
         
-        # মাস্টার ফিক্স: Duplicate class Kotlin এরর দূর করার জন্য বিল্ড ফাইল এডিট করা
-        echo "configurations.all { exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8' }" >> android/build.gradle
+        # মাস্টার ফিক্স: Duplicate class Kotlin এরর দূর করার জন্য
+        # এটা অ্যাপের বিল্ড ফাইলে অটোমেটিক কনফ্লিক্ট সলভ করার কোড ঢুকিয়ে দেবে
+        sed -i '/dependencies {/a \    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))' android/app/build.gradle
         
         npx cap sync android
         cd android && ./gradlew assembleDebug
