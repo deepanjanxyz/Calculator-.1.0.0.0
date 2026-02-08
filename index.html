@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Pro Calc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Calculator Pro</title>
     
-    <link rel="icon" href="logo.png?v=2" type="image/png">
-    <link rel="apple-touch-icon" href="logo.png?v=2">
-    <link rel="manifest" href="manifest.json?v=2">
+    <link rel="icon" href="appicon.png">
+    <link rel="apple-touch-icon" href="appicon.png">
+    <link rel="manifest" href="manifest.json">
     
     <link rel="stylesheet" href="style.css">
 </head>
@@ -18,30 +18,30 @@
             <div id="live-result"></div>
         </div>
         <div class="buttons">
-            <button class="btn opt" onclick="handleInput('C')">C</button>
-            <button class="btn opt" onclick="handleInput('(')">(</button>
-            <button class="btn opt" onclick="handleInput(')')">)</button>
-            <button class="btn func" onclick="handleInput('/')">÷</button>
+            <button class="btn opt">C</button>
+            <button class="btn opt">(</button>
+            <button class="btn opt">)</button>
+            <button class="btn func" data-val="/">÷</button>
 
-            <button class="btn num" onclick="handleInput('7')">7</button>
-            <button class="btn num" onclick="handleInput('8')">8</button>
-            <button class="btn num" onclick="handleInput('9')">9</button>
-            <button class="btn func" onclick="handleInput('*')">×</button>
+            <button class="btn num">7</button>
+            <button class="btn num">8</button>
+            <button class="btn num">9</button>
+            <button class="btn func" data-val="*">×</button>
 
-            <button class="btn num" onclick="handleInput('4')">4</button>
-            <button class="btn num" onclick="handleInput('5')">5</button>
-            <button class="btn num" onclick="handleInput('6')">6</button>
-            <button class="btn func" onclick="handleInput('-')">−</button>
+            <button class="btn num">4</button>
+            <button class="btn num">5</button>
+            <button class="btn num">6</button>
+            <button class="btn func">-</button>
 
-            <button class="btn num" onclick="handleInput('1')">1</button>
-            <button class="btn num" onclick="handleInput('2')">2</button>
-            <button class="btn num" onclick="handleInput('3')">3</button>
-            <button class="btn func" onclick="handleInput('+')">+</button>
+            <button class="btn num">1</button>
+            <button class="btn num">2</button>
+            <button class="btn num">3</button>
+            <button class="btn func">+</button>
 
-            <button class="btn num" onclick="handleInput('%')">%</button>
-            <button class="btn num zero-btn" onclick="handleInput('0')">0</button>
-            <button class="btn num" onclick="handleInput('.')">.</button>
-            <button class="btn equals" onclick="handleInput('=')">=</button>
+            <button class="btn num">%</button>
+            <button class="btn num zero-btn">0</button>
+            <button class="btn num">.</button>
+            <button class="btn equals">=</button>
         </div>
     </div>
     <script src="script.js"></script>

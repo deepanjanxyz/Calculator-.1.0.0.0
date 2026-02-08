@@ -1,21 +1,10 @@
 const display = document.getElementById('display');
 const liveResult = document.getElementById('live-result');
-const historyList = document.getElementById('history-list');
 
 let currentInput = "0";
-let history = JSON.parse(localStorage.getItem('calcHistory')) || [];
 
-function factorial(n) {
-    if (n < 0) return "Err";
-    if (n > 5000) return "Too Large";
-    if (n === 0 || n === 1) return "1";
-    let res = 1n;
-    for (let i = 2n; i <= BigInt(n); i++) res *= i;
-    return res.toString();
-}
-
+// একদম ইনস্ট্যান্ট টাচ হ্যান্ডলার
 function handleInput(val) {
-    // ভাইব্রেশন কোড সরিয়ে ফেলা হলো
     if (val === 'C') {
         currentInput = "0";
         liveResult.innerText = "";
@@ -25,55 +14,32 @@ function handleInput(val) {
         calculateLive();
     } 
     else if (val === '=') {
-        finalizeCalculation();
-    }
-    else if (val === '!') {
-        try {
-            let numMatch = currentInput.match(/(\d+)$/);
-            if (numMatch) {
-                let num = parseInt(numMatch[0]);
-                let fact = factorial(num);
-                currentInput = currentInput.replace(/(\d+)$/, fact);
-                saveToHistory(num + "!", fact);
-            }
-        } catch (e) { currentInput = "Error"; }
+        if (liveResult.innerText) {
+            currentInput = liveResult.innerText;
+            liveResult.innerText = "";
+        }
     }
     else {
         if (currentInput === "0" && !isNaN(val)) currentInput = val;
         else currentInput += val;
         calculateLive();
     }
-    updateDisplay();
+    display.innerText = currentInput;
 }
 
 function calculateLive() {
     try {
-        let expr = currentInput.replace(/×/g, '*').replace(/÷/g, '/').replace(/\^/g, '**');
-        if (expr.includes('√')) expr = expr.replace(/√(\d+(\.\d+)?)/g, 'Math.sqrt()');
-        expr = expr.replace(/(\d+)%/g, '(/100)');
+        let expr = currentInput.replace(/×/g, '*').replace(/÷/g, '/');
         let res = eval(expr);
-        if (res !== undefined && !isNaN(res)) liveResult.innerText = Number.isInteger(res) ? res : res.toFixed(4);
-        else liveResult.innerText = "";
+        if (res !== undefined) liveResult.innerText = res;
     } catch { liveResult.innerText = ""; }
 }
 
-function finalizeCalculation() {
-    if (liveResult.innerText && liveResult.innerText !== "") {
-        saveToHistory(currentInput, liveResult.innerText);
-        currentInput = liveResult.innerText;
-        liveResult.innerText = "";
-        updateDisplay();
-    }
-}
-
-function updateDisplay() {
-    display.innerText = currentInput;
-    display.style.fontSize = currentInput.length > 10 ? "2.5rem" : "clamp(3rem, 12vw, 5.5rem)";
-}
-
-function saveToHistory(expr, res) {
-    history.unshift({ expr, res });
-    if (history.length > 20) history.pop();
-    localStorage.setItem('calcHistory', JSON.stringify(history));
-}
-// হিস্ট্রি প্যানেল লজিক আগের মতোই থাকবে...
+// বাটনগুলোতে ফাস্ট টাচ ইভেন্ট অ্যাড করা
+document.querySelectorAll('.btn').forEach(button => {
+    button.addEventListener('pointerdown', (e) => {
+        e.preventDefault(); // ডাবল ট্যাপ জুম বন্ধ করবে
+        let val = button.getAttribute('data-val') || button.innerText;
+        handleInput(val);
+    });
+});
