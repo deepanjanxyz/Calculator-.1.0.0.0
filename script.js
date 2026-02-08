@@ -31,40 +31,46 @@ if (SpeechRecognition) {
     });
 }
 
-// ভয়েস আউটপুট ফাংশন (স্পিকার ফাটিয়ে দেওয়ার জন্য!)
+// ভয়েস আউটপুট ফাংশন
 function speakResult(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'bn-BD';
-    utterance.rate = 1;
     speechSynthesis.speak(utterance);
 }
 
-// ভয়েস কমান্ড প্রসেস এবং হিসাব
+// ভয়েস কমান্ড প্রসেস করার আসল জায়গা
 function processVoiceCommand(text) {
-    let mathExpr = text.toLowerCase()
+    // অগোছালো শব্দ আর স্পেস পরিষ্কার করা
+    let cleanText = text.replace(/ /g, ''); 
+    
+    let mathExpr = cleanText.toLowerCase()
         .replace(/যোগ|প্লাস/g, '+')
         .replace(/বিয়োগ|বিয়োগ|মাইনাস/g, '-')
         .replace(/গুণ|গুন|মাল্টিপ্লাই/g, '*')
         .replace(/ভাগ/g, '/')
         .replace(/x/g, '*');
 
-    // বাংলা সংখ্যাকে ইংরেজিতে রূপান্তর
+    // বাংলা সংখ্যাকে ইংরেজিতে রূপান্তর (যাতে হিসাব করতে সুবিধা হয়)
     const numbers = {'০':'0','১':'1','২':'2','৩':'3','৪':'4','৫':'5','৬':'6','৭':'7','৮':'8','৯':'9'};
     for (let bn in numbers) {
         mathExpr = mathExpr.replace(new RegExp(bn, 'g'), numbers[bn]);
     }
+
+    // শুধুমাত্র সংখ্যা আর অপারেটর ছাড়া বাকি সব ফেলে দেওয়া (এরর ঠেকানোর জন্য)
+    mathExpr = mathExpr.replace(/[^0-9+\-*/.]/g, '');
     
     try {
+        if(mathExpr === "") throw "Empty";
         const result = eval(mathExpr);
         display.textContent = result;
         speakResult("উত্তর হলো " + result);
     } catch {
-        display.textContent = 'ভুল হয়েছে';
-        speakResult('আবার বলুন');
+        display.textContent = 'আবার বলুন';
+        speakResult('ঠিকমতো শুনতে পাইনি, আবার বলুন');
     }
 }
 
-// বাটন ক্লিক হ্যান্ডলার (সাধারণ হিসাবের জন্য)
+// বাটন ক্লিক হ্যান্ডলার
 document.querySelectorAll('.button').forEach(button => {
     button.addEventListener('click', (e) => {
         const value = e.target.textContent;
@@ -77,16 +83,18 @@ function handleInput(value) {
         display.textContent = '0';
     } else if (value === '=') {
         try {
-            const result = eval(display.textContent.replace(/×/g, '*').replace(/÷/g, '/').replace(/x/g, '*'));
+            // গুণ আর ভাগের চিহ্নগুলো ঠিক করে নেওয়া
+            let expression = display.textContent.replace(/×/g, '*').replace(/÷/g, '/').replace(/x/g, '*');
+            const result = eval(expression);
             display.textContent = result;
             speakResult(result.toString());
         } catch {
-            display.textContent = 'Error';
+            display.textContent = 'ভুল';
         }
     } else if (value === '←') {
         display.textContent = display.textContent.slice(0, -1) || '0';
     } else {
-        if (display.textContent === '0' || display.textContent === 'Error') {
+        if (display.textContent === '0' || display.textContent === 'ভুল') {
             display.textContent = value;
         } else {
             display.textContent += value;
@@ -94,7 +102,6 @@ function handleInput(value) {
     }
 }
 
-// স্পিকার বাটন টিপলে ডিসপ্লের লেখা পড়বে
 speakBtn.addEventListener('click', () => {
     speakResult(display.textContent);
 });
