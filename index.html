@@ -3,56 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masterpiece Calculator</title>
+    <title>Floating Masterpiece Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-mode">
+<body>
     <div id="brightness-overlay"></div>
-
-    <div class="container">
+    <div class="container" id="calcContainer">
         <div class="header-tools">
-            <button id="historyBtn">📜 History</button>
-            <button id="settingsBtn">⚙️ Settings</button>
+            <button id="historyBtn">📜 Hist</button>
+            <button id="settingsBtn">⚙️ Sett</button>
+            <button id="floatBtn">📺 Float</button>
             <button id="factMode">FACT</button>
         </div>
         
         <div id="display-container">
             <div id="display">0</div>
             <div id="live-result"></div>
-        </div>
-
-        <div id="settings-panel" class="hidden overlay-panel">
-            <div class="panel-header">
-                <span>Settings</span>
-                <button class="close-btn">✖</button>
-            </div>
-            <div class="setting-item">
-                <label>Theme Mode:</label>
-                <select id="themeSelect">
-                    <option value="dark">Dark Mode</option>
-                    <option value="light">Light Mode</option>
-                    <option value="blue">Blue Sky</option>
-                </select>
-            </div>
-            <div class="setting-item">
-                <label>Brightness:</label>
-                <input type="range" id="brightnessRange" min="0" max="0.7" step="0.1" value="0">
-            </div>
-            <div class="setting-item">
-                <label>Button Color:</label>
-                <input type="color" id="colorPicker" value="#ff9f0a">
-            </div>
-        </div>
-
-        <div id="history-panel" class="hidden overlay-panel">
-            <div class="panel-header">
-                <span>History</span>
-                <div class="history-controls">
-                    <button id="clearHistory">Clear</button>
-                    <button class="close-btn">✖</button>
-                </div>
-            </div>
-            <div id="history-list"></div>
         </div>
 
         <div class="buttons">
@@ -79,6 +45,16 @@
             <div class="button">0</div>
             <div class="button">.</div>
             <div class="button equals span-two">=</div>
+        </div>
+
+        <div id="settings-panel" class="hidden overlay-panel">
+            <div class="panel-header"><span>Settings</span><button class="close-btn">✖</button></div>
+            <div class="setting-item"><span>Theme</span><select id="themeSelect"><option value="dark">Dark</option><option value="light">Light</option></select></div>
+            <div class="setting-item"><span>Float Size</span><input type="range" id="floatSize" min="150" max="300" value="250"></div>
+        </div>
+        <div id="history-panel" class="hidden overlay-panel">
+            <div class="panel-header"><span>History</span><button class="close-btn">✖</button></div>
+            <div id="history-list"></div>
         </div>
     </div>
     <script src="script.js"></script>

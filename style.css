@@ -1,28 +1,24 @@
 :root { --primary-color: #3498db; --bg-color: #0f172a; --panel-bg: #1e293b; --text-color: #f8fafc; }
+body { background: var(--bg-color); height: 100vh; margin: 0; display: flex; justify-content: center; align-items: center; font-family: sans-serif; overflow: hidden; }
 
-body { background: var(--bg-color); color: var(--text-color); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: 'Inter', sans-serif; transition: 0.3s; }
+.container { background: var(--panel-bg); padding: 15px; border-radius: 20px; width: 350px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; z-index: 10; border: 1px solid rgba(255,255,255,0.1); }
 
-.container { background: var(--panel-bg); padding: 15px; border-radius: 20px; width: 360px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); position: relative; }
+/* ফ্লোটিং মোড স্টাইল */
+.container.floating {
+    position: fixed; top: 20px; right: 20px; width: 200px !important; 
+    padding: 10px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    cursor: move; transform: scale(0.9);
+}
+.floating #display { font-size: 1.2rem; }
+.floating .button { padding: 10px; font-size: 1rem; border-radius: 8px; }
+.floating .header-tools button { font-size: 10px; padding: 5px; }
 
-.header-tools { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
-.header-tools button { flex: 1; background: rgba(255,255,255,0.05); color: var(--text-color); border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 12px; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.2s; }
-.header-tools button:hover { background: rgba(255,255,255,0.1); }
+#display-container { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; text-align: right; margin-bottom: 10px; }
+#display { font-size: 2rem; color: #fff; word-wrap: break-word; }
+#live-result { color: var(--primary-color); font-size: 1.1rem; }
 
-#display-container { background: rgba(0,0,0,0.3); padding: 25px 20px; border-radius: 18px; text-align: right; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05); }
-#display { font-size: 2.2rem; font-weight: 300; letter-spacing: -1px; word-wrap: break-word; min-height: 50px; }
-#live-result { color: var(--primary-color); font-size: 1.2rem; margin-top: 8px; font-weight: 500; opacity: 0.8; }
-
-.buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-.button { background: rgba(255,255,255,0.03); color: var(--text-color); padding: 20px; border-radius: 16px; text-align: center; cursor: pointer; font-size: 1.4rem; font-weight: 500; transition: 0.1s; border: 1px solid rgba(255,255,255,0.02); }
-.button:active { transform: scale(0.92); background: rgba(255,255,255,0.1); }
-
-.opt { color: #38bdf8; font-weight: 700; background: rgba(56, 189, 248, 0.05); }
-.action { color: #f43f5e; font-weight: 700; }
-.equals { background: linear-gradient(135deg, #3498db, #2980b9) !important; color: white !important; font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4); }
-.span-two { grid-column: span 2; }
-
-/* Overlay Panels */
-.overlay-panel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; border-radius: 20px; z-index: 100; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; }
+.buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.button { background: rgba(255,255,255,0.05); color: #fff; padding: 18px; border-radius: 12px; text-align: center; cursor: pointer; }
+.equals { background: var(--primary-color); }
 .hidden { display: none !important; }
-
-#brightness-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; pointer-events: none; z-index: 9999; opacity: 0; }
+.overlay-panel { position: absolute; top:0; left:0; width:100%; height:100%; background: var(--panel-bg); border-radius:20px; padding:20px; box-sizing:border-box; z-index:100; }
