@@ -1,84 +1,13 @@
-:root { 
-    --bg: #1C1C1E; /* একদম কালো নয়, হালকা ধূসর বা চারকোল টাইপ */
-    --num: #2C2C2E; /* বাটনের রং আরও একটু হালকা */
-    --opt: #505050; /* অপশন বাটনগুলো একটু ডিফারেন্ট */
-    --orange: #FF9F0A; 
-}
-
-body { 
-    margin: 0; 
-    background: var(--bg); 
-    color: white; 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-    height: 100vh; 
-    overflow: hidden; 
-}
-
-.container { 
-    display: flex; 
-    flex-direction: column; 
-    height: 100%; 
-    padding: 20px 20px 50px 20px; /* নিচ থেকে বাটনগুলো আরও একটু উপরে তোলা হলো */
-}
-
-.display-area { 
-    flex: 1; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-end; 
-    align-items: flex-end; 
-    padding-bottom: 40px; 
-    padding-right: 10px;
-}
-
-#display { font-size: 5rem; font-weight: 300; text-align: right; width: 100%; }
-#live-result { font-size: 2rem; color: #A2A2A2; height: 40px; margin-top: 10px; }
-
-.buttons-grid { 
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    grid-template-rows: repeat(5, 1fr); 
-    gap: 15px; 
-}
-
-.btn { 
-    border: none; 
-    border-radius: 50%; 
-    height: 75px; 
-    font-size: 2.2rem; 
-    background: var(--num); 
-    color: white; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    outline: none; 
-    transition: background 0.2s;
-}
-
-.btn:active { 
-    background: #3A3A3C; 
-    transform: scale(0.92); 
-}
-
-.opt { 
-    background: var(--opt); 
-    color: #D1D1D6; 
-}
-
-.func { 
-    background: var(--orange); 
-}
-
-.equals { 
-    grid-row: span 2; 
-    background: var(--orange); 
-    border-radius: 40px; 
-    height: 100%; 
-}
-
-.zero-btn { 
-    grid-column: span 2; 
-    border-radius: 40px; 
-    justify-content: flex-start; 
-    padding-left: 35px; 
-}
+:root { --bg: #1C1C1E; --num: #2C2C2E; --opt: #505050; --orange: #FF9F0A; }
+body { margin: 0; background: var(--bg); color: white; font-family: sans-serif; height: 100vh; overflow: hidden; }
+.container { display: flex; flex-direction: column; height: 100%; padding: 20px 20px 60px 20px; }
+.display-area { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; padding-bottom: 20px; overflow: hidden; }
+#display { font-size: 5rem; text-align: right; width: 100%; white-space: nowrap; transition: font-size 0.1s ease; }
+#live-result { font-size: 1.8rem; color: #888; height: 35px; }
+.buttons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.btn { border: none; border-radius: 50%; height: 70px; font-size: 2rem; background: var(--num); color: white; display: flex; align-items: center; justify-content: center; }
+.btn:active { opacity: 0.7; transform: scale(0.95); }
+.opt { background: var(--opt); }
+.func { background: var(--orange); }
+.equals { grid-row: span 2; background: var(--orange); border-radius: 40px; height: 100%; }
+.zero-btn { grid-column: span 2; border-radius: 40px; justify-content: flex-start; padding-left: 30px; }
