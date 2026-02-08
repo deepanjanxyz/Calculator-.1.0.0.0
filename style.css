@@ -1,11 +1,48 @@
 :root { --bg: #000; --num: #1c1c1e; --opt: #3a3a3c; --orange: #ff9f0a; }
-body { margin: 0; background: var(--bg); color: white; font-family: sans-serif; height: 100vh; overflow: hidden; }
-.container { display: flex; flex-direction: column; height: 100%; padding: 20px; }
-.display-area { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; padding-bottom: 20px; }
+body { 
+    margin: 0; 
+    background: var(--bg); 
+    color: white; 
+    font-family: sans-serif; 
+    height: 100vh; 
+    overflow: hidden; 
+}
+.container { 
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; 
+    padding: 20px 20px 40px 20px; /* নিচের প্যাডিং বাড়ানো হয়েছে */
+}
+.display-area { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-end; 
+    align-items: flex-end; 
+    padding-bottom: 30px; 
+}
 #display { font-size: 4.5rem; text-align: right; width: 100%; }
 #live-result { font-size: 1.8rem; color: #888; height: 40px; }
-.buttons-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(5, 1fr); gap: 12px; }
-.btn { border: none; border-radius: 50%; height: 75px; font-size: 2rem; background: var(--num); color: white; display: flex; align-items: center; justify-content: center; outline: none; }
+
+.buttons-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: repeat(5, 1fr); 
+    gap: 12px; 
+    margin-bottom: 20px; /* বাটনগুলোকে ওপরে তোলার জন্য মার্জিন */
+}
+.btn { 
+    border: none; 
+    border-radius: 50%; 
+    height: 75px; 
+    font-size: 2rem; 
+    background: var(--num); 
+    color: white; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    outline: none; 
+}
 .btn:active { background: #444; transform: scale(0.95); }
 .opt { background: var(--opt); }
 .func { background: var(--orange); }
