@@ -4,18 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Elite Calc Pro</title>
-    <link rel="icon" type="image/png" href="icon.png">
-    <link rel="apple-touch-icon" href="icon.png">
-    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="icon.png">
 </head>
 <body class="dark-mode">
     <div id="app-overlay"></div>
     <div class="container">
         <div class="top-nav">
-            <button class="nav-btn" onclick="toggleScreen('history-screen')">🕒 History</button>
+            <button class="nav-btn" onclick="openHistory()">🕒 History</button>
             <div class="brand">ELITE</div>
-            <button class="nav-btn" onclick="toggleScreen('settings-screen')">⚙️ Settings</button>
+            <button class="nav-btn" onclick="openSettings()">⚙️ Settings</button>
         </div>
 
         <div class="display-area">
@@ -26,8 +24,8 @@
         <div class="buttons-grid">
             <button class="btn opt" onclick="handleInput('C')">AC</button>
             <button class="btn opt" onclick="handleInput('%')">%</button>
-            <button class="btn opt" onclick="handleInput('÷')">÷</button>
-            <button class="btn func" onclick="handleInput('×')">×</button>
+            <button class="btn opt" onclick="handleInput('/')">÷</button>
+            <button class="btn func" onclick="handleInput('*')">×</button>
 
             <button class="btn num" onclick="handleInput('7')">7</button>
             <button class="btn num" onclick="handleInput('8')">8</button>
@@ -42,21 +40,24 @@
             <button class="btn num" onclick="handleInput('1')">1</button>
             <button class="btn num" onclick="handleInput('2')">2</button>
             <button class="btn num" onclick="handleInput('3')">3</button>
-            
             <button class="btn equals" onclick="handleInput('=')">=</button>
 
             <button class="btn num zero-btn" onclick="handleInput('0')">0</button>
             <button class="btn num" onclick="handleInput('.')">.</button>
-            <button class="btn opt" onclick="handleInput('C')">CLS</button>
+            <button class="btn opt" onclick="handleInput('00')">00</button>
         </div>
     </div>
 
     <div id="settings-screen" class="screen hidden">
-        <div class="screen-header"><button onclick="toggleScreen('settings-screen')">⬅ Back</button><h2>Settings</h2></div>
-        <div class="setting-item"><label>Brightness</label><input type="range" min="10" max="100" value="100" oninput="updateBrightness(this.value)"></div>
+        <div class="screen-header"><button onclick="closeSettings()">⬅ Back</button><h2>Settings</h2></div>
+        <div class="setting-item">
+            <label>Brightness</label>
+            <input type="range" min="10" max="100" value="100" oninput="updateBrightness(this.value)">
+        </div>
     </div>
+
     <div id="history-screen" class="screen hidden">
-        <div class="screen-header"><button onclick="toggleScreen('history-screen')">⬅ Back</button><h2>History</h2></div>
+        <div class="screen-header"><button onclick="closeHistory()">⬅ Back</button><h2>History</h2></div>
         <div id="history-list"></div>
     </div>
 
