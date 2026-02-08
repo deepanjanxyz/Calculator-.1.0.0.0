@@ -8,14 +8,7 @@
     <link rel="icon" type="image/png" href="icon.png">
 </head>
 <body class="dark-mode">
-    <div id="app-overlay"></div>
     <div class="container">
-        <div class="top-nav">
-            <button class="nav-btn" onclick="openHistory()">🕒 History</button>
-            <div class="brand">ELITE</div>
-            <button class="nav-btn" onclick="openSettings()">⚙️ Settings</button>
-        </div>
-
         <div class="display-area">
             <div id="display">0</div>
             <div id="live-result"></div>
@@ -44,23 +37,9 @@
 
             <button class="btn num zero-btn" onclick="handleInput('0')">0</button>
             <button class="btn num" onclick="handleInput('.')">.</button>
-            <button class="btn opt" onclick="handleInput('00')">00</button>
+            <button class="btn opt" onclick="handleInput('C')">C</button>
         </div>
     </div>
-
-    <div id="settings-screen" class="screen hidden">
-        <div class="screen-header"><button onclick="closeSettings()">⬅ Back</button><h2>Settings</h2></div>
-        <div class="setting-item">
-            <label>Brightness</label>
-            <input type="range" min="10" max="100" value="100" oninput="updateBrightness(this.value)">
-        </div>
-    </div>
-
-    <div id="history-screen" class="screen hidden">
-        <div class="screen-header"><button onclick="closeHistory()">⬅ Back</button><h2>History</h2></div>
-        <div id="history-list"></div>
-    </div>
-
     <script src="script.js"></script>
 </body>
 </html>
