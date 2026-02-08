@@ -1,0 +1,21 @@
+{
+    "name": "স্মার্ট ক্যালকুলেটর",
+    "short_name": "ক্যালকুলেটর",
+    "description": "ভয়েস সাপোর্টেড ক্যালকুলেটর অ্যাপ",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#667eea",
+    "theme_color": "#667eea",
+    "icons": [
+        {
+            "src": "https://via.placeholder.com/192/667eea/ffffff?text=🧮",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://via.placeholder.com/512/667eea/ffffff?text=🧮",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
