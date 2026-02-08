@@ -1,27 +1,33 @@
 const display = document.getElementById('display');
 const factModeBtn = document.getElementById('factMode');
 
-factModeBtn.addEventListener('click', () => {
-    let num = prompt("কত সংখ্যার ফ্যাক্টোরিয়াল বের করতে চান? (সাবধান: বড় সংখ্যায় সময় লাগবে)");
-    if (num) {
-        display.textContent = "হিসাব হচ্ছে...";
-        setTimeout(() => {
-            calculateFactorial(parseInt(num));
-        }, 100);
-    }
-});
-
+// আনলিমিটেড ফ্যাক্টোরিয়াল লজিক
 function calculateFactorial(n) {
     if (n < 0) {
-        display.textContent = "ভুল ইনপুট";
+        display.textContent = "Error";
         return;
     }
-    let res = BigInt(1);
-    for (let i = 2; i <= n; i++) {
-        res *= BigInt(i);
-    }
-    display.textContent = res.toString();
+    display.textContent = "Calculating...";
+    
+    setTimeout(() => {
+        try {
+            let res = BigInt(1);
+            for (let i = 2; i <= n; i++) {
+                res *= BigInt(i);
+            }
+            display.textContent = res.toString();
+        } catch (e) {
+            display.textContent = "Too Big!";
+        }
+    }, 50);
 }
+
+factModeBtn.addEventListener('click', () => {
+    let num = prompt("Enter number for factorial:");
+    if (num && !isNaN(num)) {
+        calculateFactorial(parseInt(num));
+    }
+});
 
 document.querySelectorAll('.button').forEach(button => {
     button.addEventListener('click', (e) => {
@@ -34,16 +40,17 @@ function handleInput(value) {
         display.textContent = '0';
     } else if (value === '!') {
         let n = parseInt(display.textContent);
-        calculateFactorial(n);
+        if(!isNaN(n)) calculateFactorial(n);
     } else if (value === '=') {
         try {
             let expr = display.textContent.replace(/×/g, '*').replace(/÷/g, '/');
-            display.textContent = eval(expr);
+            let result = eval(expr);
+            display.textContent = Number.isInteger(result) ? result : result.toFixed(5);
         } catch {
             display.textContent = 'Error';
         }
     } else if (value === '←') {
-        display.textContent = display.textContent.slice(0, -1) || '0';
+        display.textContent = display.textContent.length > 1 ? display.textContent.slice(0, -1) : '0';
     } else {
         if (display.textContent === '0' || display.textContent === 'Error') {
             display.textContent = value;
