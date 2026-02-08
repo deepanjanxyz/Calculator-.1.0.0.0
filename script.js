@@ -2,23 +2,17 @@ const display = document.getElementById('display');
 const liveResult = document.getElementById('live-result');
 const historyPanel = document.getElementById('history-panel');
 const historyList = document.getElementById('history-list');
-const factModeBtn = document.getElementById('factMode');
 
-// হিস্ট্রি লোড করা
 let history = JSON.parse(localStorage.getItem('calcHistory')) || [];
 
-// ফ্যাক্টোরিয়াল ফাংশন (BigInt দিয়ে যাতে বড় সংখ্যা সাপোর্ট করে)
 function calculateFactorial(n) {
     if (n < 0) return "Error";
     if (n === 0 || n === 1) return "1";
     let res = BigInt(1);
-    for (let i = 2; i <= n; i++) {
-        res *= BigInt(i);
-    }
+    for (let i = 2; i <= n; i++) res *= BigInt(i);
     return res.toString();
 }
 
-// হিস্ট্রি সেভ করা
 function saveHistory(expr, res) {
     if (!expr || !res || res === "Error") return;
     history.unshift({ expr, res });
@@ -26,11 +20,10 @@ function saveHistory(expr, res) {
     localStorage.setItem('calcHistory', JSON.stringify(history));
 }
 
-// হিস্ট্রি দেখানো
 function renderHistory() {
     historyList.innerHTML = '';
     if (history.length === 0) {
-        historyList.innerHTML = '<div class="history-item">No history yet!</div>';
+        historyList.innerHTML = '<div style="color:gray;padding:10px;">No History</div>';
         return;
     }
     history.forEach((item) => {
@@ -46,27 +39,24 @@ function renderHistory() {
     });
 }
 
-// বাটন ইভেন্টগুলো
 document.getElementById('historyBtn').onclick = () => {
     renderHistory();
     historyPanel.classList.toggle('hidden');
 };
 
 document.getElementById('closeHistory').onclick = () => historyPanel.classList.add('hidden');
-
 document.getElementById('clearHistory').onclick = () => {
     history = [];
     localStorage.removeItem('calcHistory');
     renderHistory();
 };
 
-factModeBtn.onclick = () => {
-    let num = prompt("Enter number for factorial:");
+document.getElementById('factMode').onclick = () => {
+    let num = prompt("Factorial of:");
     if (num && !isNaN(num)) {
-        const res = calculateFactorial(parseInt(num));
+        let res = calculateFactorial(parseInt(num));
         display.textContent = res;
         saveHistory(num + "!", res);
-        liveResult.textContent = "";
     }
 };
 
@@ -78,14 +68,6 @@ function handleInput(value) {
     if (value === 'C') {
         display.textContent = '0';
         liveResult.textContent = '';
-    } else if (value === '!') {
-        let n = parseInt(display.textContent);
-        if (!isNaN(n)) {
-            const res = calculateFactorial(n);
-            saveHistory(display.textContent + "!", res);
-            display.textContent = res;
-            liveResult.textContent = "";
-        }
     } else if (value === '=') {
         if (liveResult.textContent !== '' && liveResult.textContent !== 'Error') {
             saveHistory(display.textContent, liveResult.textContent);
@@ -104,15 +86,20 @@ function handleInput(value) {
 
 function updateLiveResult() {
     try {
-        let text = display.textContent.replace(/×/g, '*').replace(/÷/g, '/');
-        // যদি শুধু সংখ্যা থাকে তবে রেজাল্ট দেখানোর দরকার নেই
-        if (!/[+*/-]/.test(text)) {
-            liveResult.textContent = '';
-            return;
+        let text = display.textContent
+            .replace(/×/g, '*')
+            .replace(/÷/g, '/')
+            .replace(/\^/g, '**') // Power
+            .replace(/√(\d+(\.\d+)?)/g, 'Math.sqrt()') // Square root
+            .replace(/(\d+)%/g, '(/100)'); // Percentage
+
+        // Special case for √ before a number
+        if (text.includes('√')) {
+            text = text.replace(/√/g, 'Math.sqrt');
         }
-        // যদি শেষে অপারেটর না থাকে তবেই ক্যালকুলেট করবে
-        if (/[0-9]$/.test(text)) {
-            let res = eval(text);
+
+        let res = eval(text);
+        if (res !== undefined) {
             liveResult.textContent = Number.isInteger(res) ? res : res.toFixed(4);
         }
     } catch {
@@ -120,5 +107,4 @@ function updateLiveResult() {
     }
 }
 
-// শুরুতে হিস্ট্রি রেন্ডার করে রাখা
 renderHistory();
