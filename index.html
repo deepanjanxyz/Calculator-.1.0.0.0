@@ -3,19 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Pro Calculator</title>
+    <title>Pro Calculator with History</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="header-tools">
-            <span style="color: #00d2d3;">Live Mode</span>
+            <button id="historyBtn" title="Show History">📜 History</button>
             <button id="factMode">FACT</button>
         </div>
         <div id="display-container">
             <div id="display">0</div>
             <div id="live-result"></div>
         </div>
+
+        <div id="history-panel" class="hidden">
+            <div class="history-header">
+                <span>History</span>
+                <button id="clearHistory">Clear</button>
+                <button id="closeHistory">X</button>
+            </div>
+            <div id="history-list"></div>
+        </div>
+
         <div class="buttons">
             <div class="button">C</div>
             <div class="button">←</div>
