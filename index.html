@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro Calculator</title>
+    <title>Live Pro Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="header-tools">
-            <span class="mode-tag">English Mode</span>
-            <button id="factMode" title="Big Factorial">FACT</button>
+            <span style="color: #00d2d3;">Live Mode</span>
+            <button id="factMode">FACT</button>
         </div>
-        <h1 id="title">🧮 Calculator</h1>
-        <div id="display">0</div>
-        
+        <div id="display-container">
+            <div id="display">0</div>
+            <div id="live-result"></div>
+        </div>
         <div class="buttons">
             <div class="button">C</div>
             <div class="button">←</div>

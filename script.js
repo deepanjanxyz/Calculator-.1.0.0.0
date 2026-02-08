@@ -1,31 +1,19 @@
 const display = document.getElementById('display');
+const liveResult = document.getElementById('live-result');
 const factModeBtn = document.getElementById('factMode');
 
-// আনলিমিটেড ফ্যাক্টোরিয়াল লজিক
 function calculateFactorial(n) {
-    if (n < 0) {
-        display.textContent = "Error";
-        return;
-    }
-    display.textContent = "Calculating...";
-    
-    setTimeout(() => {
-        try {
-            let res = BigInt(1);
-            for (let i = 2; i <= n; i++) {
-                res *= BigInt(i);
-            }
-            display.textContent = res.toString();
-        } catch (e) {
-            display.textContent = "Too Big!";
-        }
-    }, 50);
+    if (n < 0) return "Error";
+    let res = BigInt(1);
+    for (let i = 2; i <= n; i++) res *= BigInt(i);
+    return res.toString();
 }
 
 factModeBtn.addEventListener('click', () => {
     let num = prompt("Enter number for factorial:");
     if (num && !isNaN(num)) {
-        calculateFactorial(parseInt(num));
+        display.textContent = calculateFactorial(parseInt(num));
+        liveResult.textContent = "";
     }
 });
 
@@ -38,24 +26,36 @@ document.querySelectorAll('.button').forEach(button => {
 function handleInput(value) {
     if (value === 'C') {
         display.textContent = '0';
+        liveResult.textContent = '';
     } else if (value === '!') {
         let n = parseInt(display.textContent);
-        if(!isNaN(n)) calculateFactorial(n);
+        display.textContent = calculateFactorial(n);
+        liveResult.textContent = '';
     } else if (value === '=') {
-        try {
-            let expr = display.textContent.replace(/×/g, '*').replace(/÷/g, '/');
-            let result = eval(expr);
-            display.textContent = Number.isInteger(result) ? result : result.toFixed(5);
-        } catch {
-            display.textContent = 'Error';
+        if (liveResult.textContent !== '' && liveResult.textContent !== 'Error') {
+            display.textContent = liveResult.textContent;
+            liveResult.textContent = '';
         }
     } else if (value === '←') {
         display.textContent = display.textContent.length > 1 ? display.textContent.slice(0, -1) : '0';
+        updateLiveResult();
     } else {
-        if (display.textContent === '0' || display.textContent === 'Error') {
-            display.textContent = value;
-        } else {
-            display.textContent += value;
+        if (display.textContent === '0') display.textContent = value;
+        else display.textContent += value;
+        updateLiveResult();
+    }
+}
+
+// অটো হিসাব করার ফাংশন
+function updateLiveResult() {
+    try {
+        let expr = display.textContent.replace(/×/g, '*').replace(/÷/g, '/');
+        // যদি শেষে অপারেটর থাকে তবে হিসাব করবে না
+        if (/[0-9]$/.test(expr)) {
+            let res = eval(expr);
+            liveResult.textContent = Number.isInteger(res) ? res : res.toFixed(4);
         }
+    } catch {
+        liveResult.textContent = '';
     }
 }

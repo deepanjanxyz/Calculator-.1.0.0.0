@@ -2,11 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e1e2f 0%, #2d3436 100%);
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -14,120 +14,75 @@ body {
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    width: 320px;
+    background: #2d3436;
+    padding: 25px;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    width: 350px;
 }
 
-h1 {
-    color: white;
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-}
-
-#display {
-    background-color: rgba(0, 0, 0, 0.2);
-    color: white;
-    font-size: 2rem;
-    text-align: right;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    min-height: 80px;
-    word-wrap: break-word;
-    word-break: break-all;
-}
-
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-}
-
-.button {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    user-select: none;
-}
-
-.button:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-.button:active {
-    transform: scale(0.95);
-}
-
-.equals {
-    background-color: #48bb78;
-    grid-column: span 2;
-}
-
-.equals:hover {
-    background-color: #38a169;
-}
-
-.span-two {
-    grid-column: span 2;
-}
-
-/* অপারেটর বাটনের জন্য আলাদা কালার */
-.button:nth-child(3), 
-.button:nth-child(4),
-.button:nth-child(8),
-.button:nth-child(12) {
-    background-color: rgba(255, 165, 0, 0.3);
-}
-.settings {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 10px;
-}
-
-#langSelect {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    outline: none;
-    cursor: pointer;
-}
-
-#langSelect option {
-    background: #764ba2;
-    color: white;
-}
 .header-tools {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 #factMode {
     background: #ff4757;
     color: white;
     border: none;
-    padding: 5px 12px;
-    border-radius: 5px;
+    padding: 6px 15px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 12px;
+}
+
+/* ডিসপ্লে এরিয়া বড় করা হলো */
+#display-container {
+    background: #1e1e2f;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    text-align: right;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #display {
+    color: white;
+    font-size: 2.5rem; /* বড় ফন্ট */
+    word-wrap: break-word;
     overflow-y: auto;
-    max-height: 150px;
-    font-size: 1.5rem !important;
+    max-height: 100px;
 }
+
+#live-result {
+    color: #00d2d3;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    min-height: 1.2rem;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.button {
+    background: #34495e;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.button:active { transform: scale(0.9); }
+
+.equals { background: #00b894; grid-column: span 2; }
+.span-two { grid-column: span 2; }
