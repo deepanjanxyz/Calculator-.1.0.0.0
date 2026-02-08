@@ -1,46 +1,23 @@
-# 🧮 Smart Calculator 1.0.0
+# Elite Calculator Pro 1.0.0 📱
 
-![Demo](https://via.placeholder.com/800x400/667eea/ffffff?text=%F0%9F%94%A7+Voice+Calculator)
+A high-performance, minimalist calculator application designed for speed and precision. Built with a focus on simplicity, removing all unnecessary clutter to provide a seamless user experience.
 
-## ✨ Features
-<div align="center">
-
-| 🎤 Voice Input | 🔊 Voice Output | 📱 Mobile Responsive | ⌨️ Keyboard Support |
-|---|---|---|---|
-| Calculate by speaking | Hear the results | Works on all devices | Enter & Backspace support |
-
-</div>
-
-## 🚀 Live Demo
-[![Try Live Demo](https://img.shields.io/badge/Try_Live_Demo-🔥-brightgreen?style=for-the-badge&logo=github)](https://deepanjanxyz.github.io/Calculator-.1.0.0.0/)
-
-## 🎯 How to Use
-1. Tap the microphone button.  
-2. Give a voice command in Bengali (Example: “পাঁচ যোগ দশ”).  
-3. The result will appear instantly and will be spoken aloud.
+## ✨ Core Features
+* **Minimalist UI**: Clean, distraction-free interface focused purely on calculation.
+* **Real-time Results**: Instant calculation as you type for maximum efficiency.
+* **Dark Mode Optimization**: Deep black aesthetics designed for OLED displays and eye comfort.
+* **Responsive Layout**: Optimized for all mobile screen sizes with premium button spacing.
+* **Zero Latency**: Lightweight codebase ensuring millisecond response times.
 
 ## 🛠 Technology Stack
-- HTML5 & CSS3 (Glassmorphism UI Design)
-- JavaScript (Web Speech API)
+* **HTML5**: Semantic structure for web-based accessibility.
+* **CSS3**: Advanced grid systems and modern UI styling.
+* **JavaScript**: Optimized engine for fast arithmetic operations.
 
-## 🎨 Design Highlights
-- ✨ Clean Glassmorphism interface  
-- 🎭 Smooth hover animations  
-- 📈 Fully responsive layout  
+## 🚀 How to Use
+1. Clone the repository.
+2. Open `index.html` in any modern browser.
+3. Build the APK using GitHub Actions for mobile installation.
 
----
-
-## 👨‍💻 Developer
-**Developed by:** Deepanjan  
-**GitHub:** [deepanjanxyz](https://github.com/deepanjanxyz)
-
-<div align="center">
-  
-[![GitHub stars](https://img.shields.io/github/stars/deepanjanxyz/Calculator-.1.0.0.0?style=social)](https://github.com/deepanjanxyz/Calculator-.1.0.0.0/stargazers/)  
-[![GitHub forks](https://img.shields.io/github/forks/deepanjanxyz/Calculator-.1.0.0.0?style=social)](https://github.com/deepanjanxyz/Calculator-.1.0.0.0/network/members/)
-
-</div>
-
----
-
-⭐ **Support the project with a Star!** 🚀
+## 👤 Developer
+**Deepanjan** - *Lead Developer*
