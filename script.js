@@ -4,7 +4,7 @@ function handleInput(val) {
     const disp = document.getElementById('display');
     const live = document.getElementById('live-result');
 
-    if (val === 'C') {
+    if (val === 'AC') {
         currentInput = "0";
         live.innerText = "";
     } else if (val === '=') {
@@ -16,7 +16,6 @@ function handleInput(val) {
         if (currentInput === "0" && val !== '.') currentInput = val;
         else currentInput += val;
         
-        // রিয়েল টাইম ক্যালকুলেশন
         try {
             let res = eval(currentInput.replace(/×/g, '*').replace(/÷/g, '/'));
             live.innerText = (res !== undefined && isFinite(res)) ? "= " + res : "";
