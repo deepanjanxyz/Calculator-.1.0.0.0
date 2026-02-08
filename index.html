@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Universal Calculator</title>
+    
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="manifest" href="manifest.json">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -43,11 +48,10 @@
             <button class="btn num" onclick="handleInput('1')">1</button>
             <button class="btn num" onclick="handleInput('2')">2</button>
             <button class="btn num" onclick="handleInput('3')">3</button>
-            
             <button class="btn equals" onclick="handleInput('=')">=</button>
-            
+
             <button class="btn num" onclick="handleInput('%')">%</button>
-            <button class="btn num" onclick="handleInput('0')">0</button>
+            <button class="btn num zero-btn" onclick="handleInput('0')">0</button>
             <button class="btn num" onclick="handleInput('.')">.</button>
         </div>
 

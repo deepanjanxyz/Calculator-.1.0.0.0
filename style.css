@@ -15,22 +15,19 @@ body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0; padding: 0;
     height: 100vh; width: 100vw;
-    overflow: hidden; /* স্ক্রলবার বন্ধ */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    overflow: hidden;
+    display: flex; justify-content: center; align-items: center;
 }
 
 .container {
     width: 100%; height: 100%;
     display: flex; flex-direction: column;
-    padding: 2vh 2vw;
+    padding: 10px;
     background: black;
 }
 
-/* ডিসপ্লে এরিয়া (উপরের ৩৫% জায়গা নেবে) */
 .display-area {
-    flex: 0 0 30%; /* ফিক্সড হাইট */
+    flex: 0 0 35%;
     display: flex; flex-direction: column;
     justify-content: flex-end; align-items: flex-end;
     padding: 10px;
@@ -38,58 +35,63 @@ body {
 }
 
 #display { 
-    font-size: clamp(2rem, 10vw, 4rem); /* স্ক্রিন ছোট হলে ফন্ট ছোট হবে */
+    font-size: clamp(3rem, 12vw, 5rem); 
     font-weight: 300; 
     word-break: break-all; text-align: right; 
 }
-#live-result { color: var(--text-grey); font-size: clamp(1rem, 5vw, 1.5rem); min-height: 20px; }
+#live-result { color: var(--text-grey); font-size: clamp(1.2rem, 5vw, 2rem); min-height: 30px; }
 
-/* টুলস বার */
 .tools-bar { 
-    flex: 0 0 8%; 
-    display: flex; justify-content: space-between; align-items: center; 
-    padding: 0 5px;
+    flex: 0 0 8%; display: flex; justify-content: space-between; align-items: center; padding: 0 10px;
 }
-.tools-bar button { background: none; border: none; color: var(--orange); font-size: clamp(0.8rem, 4vw, 1rem); }
-.backspace { font-size: 1.5rem !important; color: #ff453a !important; }
+.tools-bar button { background: none; border: none; color: var(--orange); font-size: 1.2rem; }
+.backspace { font-size: 1.8rem !important; color: #ff453a !important; }
 
-/* বাটন গ্রিড (বাকি সব জায়গা নেবে) */
 .buttons {
-    flex: 1; /* বাকি সব জায়গা দখল করবে */
+    flex: 1;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    gap: 2vmin; /* স্ক্রিন সাইজ অনুযায়ী গ্যাপ হবে */
+    gap: 10px;
+    padding-top: 10px;
 }
 
 .btn {
     background-color: var(--btn-bg);
     color: var(--text-white);
     border: none;
-    border-radius: 20%; /* একটু রাউন্ড শেপ */
-    font-size: clamp(1.2rem, 6vw, 1.8rem); /* ডায়নামিক ফন্ট */
+    border-radius: 20px; /* রাউন্ডেড স্কয়ার */
+    font-size: clamp(1.5rem, 6vw, 2rem); /* ফন্ট বড় করা হয়েছে */
     cursor: pointer;
     display: flex; justify-content: center; align-items: center;
-    transition: 0.1s;
 }
 
-.btn:active { background-color: var(--btn-active); transform: scale(0.9); }
+.btn:active { background-color: var(--btn-active); transform: scale(0.95); }
 
-.opt { color: #5e5ce6; font-weight: 600; }
-.func { color: var(--orange); font-weight: 600; }
+/* স্পেশাল বাটন ডিজাইন */
+.zero-btn {
+    grid-column: span 2; /* ০ বাটন এখন দ্বিগুণ বড় */
+    background-color: var(--btn-bg);
+    border-radius: 20px;
+    justify-content: flex-start;
+    padding-left: 30px;
+}
+
 .equals {
     grid-row: span 2;
     background-color: var(--orange);
-    border-radius: 15px;
 }
 
-/* পপ-আপ মোডে হিস্ট্রি প্যানেল */
+.opt { color: #5e5ce6; font-weight: bold; background: #2c2c2e; }
+.func { color: var(--orange); font-weight: bold; font-size: 1.8rem; }
+
+/* হিস্ট্রি প্যানেল */
 #history-panel {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.95); z-index: 50;
     display: flex; flex-direction: column; padding: 20px;
 }
-.panel-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1.2rem; }
+.panel-header { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.5rem; }
 #history-list { flex-grow: 1; overflow-y: auto; }
-.history-item { padding: 10px; border-bottom: 1px solid #333; text-align: right; }
+.history-item { padding: 15px; border-bottom: 1px solid #333; text-align: right; font-size: 1.2rem; }
 .hidden { display: none !important; }
