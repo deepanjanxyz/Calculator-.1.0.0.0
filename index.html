@@ -3,26 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Pro Calculator</title>
+    <title>Masterpiece Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dark-mode">
+    <div id="brightness-overlay"></div>
+
     <div class="container">
         <div class="header-tools">
             <button id="historyBtn">📜 History</button>
+            <button id="settingsBtn">⚙️ Settings</button>
             <button id="factMode">FACT</button>
         </div>
+        
         <div id="display-container">
             <div id="display">0</div>
             <div id="live-result"></div>
         </div>
 
-        <div id="history-panel" class="hidden">
-            <div class="history-header">
-                <span>Calc History</span>
+        <div id="settings-panel" class="hidden overlay-panel">
+            <div class="panel-header">
+                <span>Settings</span>
+                <button class="close-btn">✖</button>
+            </div>
+            <div class="setting-item">
+                <label>Theme Mode:</label>
+                <select id="themeSelect">
+                    <option value="dark">Dark Mode</option>
+                    <option value="light">Light Mode</option>
+                    <option value="blue">Blue Sky</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label>Brightness:</label>
+                <input type="range" id="brightnessRange" min="0" max="0.7" step="0.1" value="0">
+            </div>
+            <div class="setting-item">
+                <label>Button Color:</label>
+                <input type="color" id="colorPicker" value="#ff9f0a">
+            </div>
+        </div>
+
+        <div id="history-panel" class="hidden overlay-panel">
+            <div class="panel-header">
+                <span>History</span>
                 <div class="history-controls">
-                    <button id="clearHistory">Clear All</button>
-                    <button id="closeHistory" style="font-size: 20px; color: #ff4757; margin-left: 10px;">✖</button>
+                    <button id="clearHistory">Clear</button>
+                    <button class="close-btn">✖</button>
                 </div>
             </div>
             <div id="history-list"></div>

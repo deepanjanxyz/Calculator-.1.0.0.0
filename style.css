@@ -1,34 +1,32 @@
-body { background: #121212; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif; }
-.container { background: #1e1e1e; padding: 20px; border-radius: 20px; width: 350px; position: relative; overflow: hidden; }
+:root { --primary-color: #ff9f0a; --bg-color: #121212; --panel-bg: #1e1e1e; --text-color: #fff; }
 
-#display-container { background: #000; padding: 20px; border-radius: 15px; text-align: right; margin-bottom: 20px; min-height: 110px; border: 1px solid #333; }
-#display { color: #fff; font-size: 1.8rem; word-wrap: break-word; overflow-y: auto; max-height: 60px; }
-#live-result { color: #00d2d3; font-size: 1.3rem; margin-top: 5px; }
+/* লাইট মোড ভেরিয়েবল */
+body.light-mode { --bg-color: #f0f0f0; --panel-bg: #ffffff; --text-color: #000; }
+body.blue-mode { --bg-color: #1a2a6c; --panel-bg: #21367a; --text-color: #fff; }
+
+body { background: var(--bg-color); color: var(--text-color); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif; transition: 0.3s; }
+
+#brightness-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; opacity: 0; pointer-events: none; z-index: 9999; }
+
+.container { background: var(--panel-bg); padding: 20px; border-radius: 20px; width: 350px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+#display-container { background: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px; text-align: right; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+#display { font-size: 1.8rem; word-wrap: break-word; }
+#live-result { color: var(--primary-color); font-size: 1.3rem; }
 
 .buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-.button { background: #333; color: #fff; padding: 18px; border-radius: 12px; text-align: center; cursor: pointer; font-size: 1.2rem; transition: 0.1s; }
-.button:active { transform: scale(0.9); background: #444; }
-
-.opt { color: #ff9f0a; font-weight: bold; }
-.action { background: #555; }
-.equals { background: #ff9f0a; color: #fff; font-weight: bold; }
+.button { background: rgba(255,255,255,0.1); color: var(--text-color); padding: 18px; border-radius: 12px; text-align: center; cursor: pointer; font-size: 1.2rem; }
+.equals { background: var(--primary-color) !important; color: white; }
+.opt { color: var(--primary-color); }
 .span-two { grid-column: span 2; }
 .hidden { display: none !important; }
 
-/* হিস্ট্রি প্যানেল ডিজাইন */
-#history-panel { 
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
-    background: rgba(30, 30, 30, 0.98); 
-    z-index: 100; padding: 20px; 
-    display: flex; flex-direction: column; 
-}
-.history-header { display: flex; justify-content: space-between; align-items: center; color: #fff; border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 10px; }
-.history-controls { display: flex; align-items: center; }
-#history-list { flex-grow: 1; overflow-y: auto; padding-right: 5px; }
-.history-item { border-bottom: 1px solid #333; padding: 12px 5px; cursor: pointer; transition: 0.2s; }
-.history-item:hover { background: #2a2a2a; }
-.history-item div:first-child { color: #aaa; font-size: 0.9rem; margin-bottom: 4px; }
+.overlay-panel { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--panel-bg); z-index: 100; padding: 20px; border-radius: 20px; display: flex; flex-direction: column; }
+.panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #444; padding-bottom: 10px; }
+.setting-item { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
 
-#clearHistory { background: #ff4757; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; }
-#closeHistory { background: none; border: none; cursor: pointer; }
-#historyBtn, #factMode { background: #333; color: #fff; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-size: 13px; }
+#history-list { overflow-y: auto; flex-grow: 1; }
+.history-item { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
+
+input[type="range"] { cursor: pointer; }
+.close-btn { background: none; border: none; color: #ff4757; font-size: 20px; cursor: pointer; }
+button { cursor: pointer; border: none; border-radius: 5px; padding: 5px 10px; }
