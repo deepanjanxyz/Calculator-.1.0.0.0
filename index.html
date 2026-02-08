@@ -3,71 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masterpiece Calculator Pro</title>
+    <title>Universal Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="brightness-overlay"></div>
     <div class="container">
-        <div class="header-tools">
-            <button id="historyBtn">📜 History</button>
-            <button id="settingsBtn">⚙️ Settings</button>
-            <button id="factMode">FACT</button>
-        </div>
-        
-        <div id="display-container" title="Long press to copy result">
+        <div class="display-area">
+            <div id="history-preview"></div>
             <div id="display">0</div>
             <div id="live-result"></div>
         </div>
 
+        <div class="tools-bar">
+            <button id="historyBtn">🕒 History</button>
+            <button class="backspace" onclick="handleInput('←')">⌫</button>
+        </div>
+
         <div class="buttons">
-            <div class="button action">C</div>
-            <div class="button action">←</div>
-            <div class="button opt">(</div>
-            <div class="button opt">)</div>
-            <div class="button opt">√</div>
-            <div class="button opt">^</div>
-            <div class="button opt">%</div>
-            <div class="button opt">/</div>
-            <div class="button">7</div>
-            <div class="button">8</div>
-            <div class="button">9</div>
-            <div class="button opt">×</div>
-            <div class="button">4</div>
-            <div class="button">5</div>
-            <div class="button">6</div>
-            <div class="button opt">-</div>
-            <div class="button">1</div>
-            <div class="button">2</div>
-            <div class="button">3</div>
-            <div class="button opt">+</div>
-            <div class="button">0</div>
-            <div class="button">.</div>
-            <div class="button equals span-two">=</div>
+            <button class="btn opt" onclick="handleInput('C')">C</button>
+            <button class="btn opt" onclick="handleInput('(')">(</button>
+            <button class="btn opt" onclick="handleInput(')')">)</button>
+            <button class="btn func" onclick="handleInput('/')">÷</button>
+
+            <button class="btn func" onclick="handleInput('!')">x!</button>
+            <button class="btn func" onclick="handleInput('^')">xʸ</button>
+            <button class="btn func" onclick="handleInput('√')">√</button>
+            <button class="btn func" onclick="handleInput('*')">×</button>
+
+            <button class="btn num" onclick="handleInput('7')">7</button>
+            <button class="btn num" onclick="handleInput('8')">8</button>
+            <button class="btn num" onclick="handleInput('9')">9</button>
+            <button class="btn func" onclick="handleInput('-')">−</button>
+
+            <button class="btn num" onclick="handleInput('4')">4</button>
+            <button class="btn num" onclick="handleInput('5')">5</button>
+            <button class="btn num" onclick="handleInput('6')">6</button>
+            <button class="btn func" onclick="handleInput('+')">+</button>
+
+            <button class="btn num" onclick="handleInput('1')">1</button>
+            <button class="btn num" onclick="handleInput('2')">2</button>
+            <button class="btn num" onclick="handleInput('3')">3</button>
+            
+            <button class="btn equals" onclick="handleInput('=')">=</button>
+            
+            <button class="btn num" onclick="handleInput('%')">%</button>
+            <button class="btn num" onclick="handleInput('0')">0</button>
+            <button class="btn num" onclick="handleInput('.')">.</button>
         </div>
 
-        <div id="settings-panel" class="hidden overlay-panel">
-            <div class="panel-header"><span>Settings</span><button class="close-btn">✖</button></div>
-            <div class="setting-item">
-                <label>Theme Mode:</label>
-                <select id="themeSelect">
-                    <option value="dark">Dark Mode</option>
-                    <option value="light">Light Mode</option>
-                </select>
-            </div>
-            <div class="setting-item">
-                <label>Brightness:</label>
-                <input type="range" id="brightnessRange" min="0" max="0.8" step="0.1" value="0.8">
-            </div>
-        </div>
-
-        <div id="history-panel" class="hidden overlay-panel">
+        <div id="history-panel" class="hidden">
             <div class="panel-header">
-                <span>History</span>
-                <button id="clearHistory">Clear</button>
-                <button class="close-btn">✖</button>
+                <span>Calculation History</span>
+                <button id="closeHistory">✕</button>
             </div>
             <div id="history-list"></div>
+            <button id="clearHistory">Clear All History</button>
         </div>
     </div>
     <script src="script.js"></script>
