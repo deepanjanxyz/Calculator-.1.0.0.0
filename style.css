@@ -108,3 +108,26 @@ h1 {
     background: #764ba2;
     color: white;
 }
+.header-tools {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#factMode {
+    background: #ff4757;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#display {
+    overflow-y: auto;
+    max-height: 150px;
+    font-size: 1.5rem !important;
+}
