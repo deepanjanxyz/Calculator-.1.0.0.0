@@ -1,59 +1,50 @@
 :root {
-    --bg-color: #000000;
-    --btn-num: #333333;
-    --btn-opt: #a5a5a5;
+    --bg-dark: #000000;
+    --btn-num: #1c1c1e;
     --btn-func: #ff9f0a;
+    --btn-opt: #3a3a3c;
     --text-white: #ffffff;
 }
 
-* { box-sizing: border-box; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.light-mode {
+    --bg-dark: #f2f2f7;
+    --btn-num: #ffffff;
+    --btn-func: #ff9f0a;
+    --btn-opt: #d1d1d6;
+    --text-white: #000000;
+}
 
-body { background: var(--bg-color); margin: 0; font-family: sans-serif; height: 100vh; display: flex; flex-direction: column; color: white; }
+body { margin: 0; font-family: -apple-system, sans-serif; background: var(--bg-dark); color: var(--text-white); transition: 0.3s; overflow: hidden; }
 
-.container { flex: 1; display: flex; flex-direction: column; padding: 20px; }
+.container { height: 100vh; display: flex; flex-direction: column; padding: 20px; }
 
-/* উপরের হিস্ট্রি বার */
-.top-bar { display: flex; justify-content: space-between; padding-bottom: 10px; }
-.icon-btn { background: none; border: none; color: var(--btn-func); font-size: 1.1rem; cursor: pointer; }
+.top-nav { display: flex; justify-content: space-between; padding: 10px 0; }
+.nav-btn { background: none; border: none; color: var(--btn-func); font-size: 1rem; cursor: pointer; }
 
 .display-area { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; padding: 20px 0; }
-#display { font-size: 4.5rem; word-break: break-all; }
-#live-result { color: #888; font-size: 1.8rem; height: 30px; }
+#display { font-size: 4rem; text-align: right; width: 100%; overflow-x: auto; }
+#live-result { font-size: 1.5rem; color: #888; height: 30px; }
 
-/* বাটন গ্রিড - ৫টা রো */
-.buttons-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-}
+.buttons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
 
 .btn {
-    height: 75px;
-    border: none;
-    border-radius: 40px;
-    font-size: 1.8rem;
-    color: white;
-    cursor: pointer;
+    height: 70px; border: none; border-radius: 50%; font-size: 1.8rem;
+    background: var(--btn-num); color: var(--text-white);
     display: flex; align-items: center; justify-content: center;
+    transition: transform 0.1s; position: relative; overflow: hidden;
 }
 
-.num { background: var(--btn-num); }
-.opt { background: var(--btn-opt); color: black; }
-.func { background: var(--btn-func); font-weight: bold; }
-.equals { background: var(--btn-func); font-weight: bold; }
+/* রিপল এফেক্ট */
+.btn:active { transform: scale(0.95); background: #555; }
 
-/* স্পেশাল: ০ বাটন দুই কলাম জুড়ে বড় */
-.zero-btn {
-    grid-column: span 2;
-    justify-content: flex-start;
-    padding-left: 30px;
-}
+.zero-btn { grid-column: span 2; border-radius: 50px; justify-content: flex-start; padding-left: 25px; }
+.func, .equals { background: var(--btn-func); color: white; border-radius: 50px; }
+.opt { background: var(--btn-opt); }
 
-.btn:active { opacity: 0.7; }
-
-/* হিস্ট্রি প্যানেল */
-#history-panel {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); display: none; padding: 30px; flex-direction: column;
-}
-.panel-header { display: flex; justify-content: space-between; font-size: 1.5rem; border-bottom: 1px solid #333; padding-bottom: 10px; }
+/* Screens (Settings/History) */
+.screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 1000; padding: 20px; display: flex; flex-direction: column; }
+.hidden { display: none; }
+.screen-header { display: flex; align-items: center; gap: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+.setting-item { margin: 25px 0; display: flex; justify-content: space-between; align-items: center; }
+input[type="range"] { width: 60%; }
+.history-item { padding: 15px; border-bottom: 1px solid #333; text-align: right; }
