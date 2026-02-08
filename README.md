@@ -1,46 +1,46 @@
-# 🧮 স্মার্ট ক্যালকুলেটর 1.0.0
+# 🧮 Smart Calculator 1.0.0
 
-![Demo](https://via.placeholder.com/800x400/667eea/ffffff?text=%F0%9F%94%A7+%E0%A6%AD%E0%A7%9F%E0%A7%87%E0%A6%B8+%E0%A6%95%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B2%E0%A6%95%E0%A7%81%E0%A6%B2%E0%A7%87%E0%A6%9F%E0%A6%B0)
+![Demo](https://via.placeholder.com/800x400/667eea/ffffff?text=%F0%9F%94%A7+Voice+Calculator)
 
-## ✨ **ফিচারসমূহ**
+## ✨ Features
 <div align="center">
 
-| 🎤 **ভয়েস ইনপুট** | 🔊 **ভয়েস আউটপুট** | 📱 **মোবাইল রেসপন্সিভ** | ⌨️ **কীবোর্ড সাপোর্ট** |
+| 🎤 Voice Input | 🔊 Voice Output | 📱 Mobile Responsive | ⌨️ Keyboard Support |
 |---|---|---|---|
-| কথায় গণনা করুন | ফলাফল শুনুন | সব ডিভাইসে কাজ করে | Enter, Backspace সাপোর্ট |
+| Calculate by speaking | Hear the results | Works on all devices | Enter & Backspace support |
 
 </div>
 
-## 🚀 **লাইভ ডেমো**
+## 🚀 Live Demo
 [![Try Live Demo](https://img.shields.io/badge/Try_Live_Demo-🔥-brightgreen?style=for-the-badge&logo=github)](https://deepanjanxyz.github.io/Calculator-.1.0.0.0/)
 
-## 🎯 **কীভাবে ব্যবহার করবেন**
-১. মাইক বাটনে ক্লিক করুন।  
-২. বাংলায় কমান্ড দিন (যেমন: "পাঁচ যোগ দশ")।  
-৩. ফলাফল স্বয়ংক্রিয়ভাবে স্ক্রিনে আসবে এবং স্পিকারে শোনা যাবে।
+## 🎯 How to Use
+1. Tap the microphone button.  
+2. Give a voice command in Bengali (Example: “পাঁচ যোগ দশ”).  
+3. The result will appear instantly and will be spoken aloud.
 
-## 🛠 **টেকনোলজি স্ট্যাক**
-- HTML5 & CSS3 (Glassmorphism UI)
+## 🛠 Technology Stack
+- HTML5 & CSS3 (Glassmorphism UI Design)
 - JavaScript (Web Speech API)
 
-## 🎨 **ডিজাইন ফিচার**
-- ✨ Glassmorphism UI
-- 🎭 Hover animations  
-- 📈 Responsive grid
+## 🎨 Design Highlights
+- ✨ Clean Glassmorphism interface  
+- 🎭 Smooth hover animations  
+- 📈 Fully responsive layout  
 
 ---
 
-## 👨‍💻 **ডেভেলপার**
-**তৈরি করেছেন:** [Deepanjan]  
+## 👨‍💻 Developer
+**Developed by:** Deepanjan  
 **GitHub:** [deepanjanxyz](https://github.com/deepanjanxyz)
 
 <div align="center">
   
-[![GitHub stars](https://img.shields.io/github/stars/deepanjanxyz/Calculator-.1.0.0.0?style=social)](https://github.com/deepanjanxyz/Calculator-.1.0.0.0/stargazers/)
+[![GitHub stars](https://img.shields.io/github/stars/deepanjanxyz/Calculator-.1.0.0.0?style=social)](https://github.com/deepanjanxyz/Calculator-.1.0.0.0/stargazers/)  
 [![GitHub forks](https://img.shields.io/github/forks/deepanjanxyz/Calculator-.1.0.0.0?style=social)](https://github.com/deepanjanxyz/Calculator-.1.0.0.0/network/members/)
 
 </div>
 
 ---
 
-**⭐ Star দিয়ে সাপোর্ট করুন! 🚀**
+⭐ **Support the project with a Star!** 🚀
