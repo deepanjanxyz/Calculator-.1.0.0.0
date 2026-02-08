@@ -1,15 +1,16 @@
 {
-    "name": "Pro Calculator",
-    "short_name": "Calculator",
-    "start_url": ".",
-    "display": "standalone",
-    "background_color": "#000000",
-    "theme_color": "#000000",
-    "icons": [
-        {
-            "src": "icon.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+  "name": "Elite Calculator Pro",
+  "short_name": "EliteCalc",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ff9f0a"
 }

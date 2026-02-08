@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Elite Calc Max</title>
+    <title>Elite Calc Pro</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="icon.png">
 </head>
 <body class="dark-mode">
     <div id="app-overlay"></div>
-    
     <div class="container">
         <div class="top-nav">
             <button class="nav-btn" onclick="toggleScreen('history-screen')">🕒 History</button>
+            <div class="brand">ELITE</div>
             <button class="nav-btn" onclick="toggleScreen('settings-screen')">⚙️ Settings</button>
         </div>
 
@@ -45,7 +47,7 @@
 
             <button class="btn num zero-btn" onclick="handleInput('0')">0</button>
             <button class="btn num" onclick="handleInput('.')">.</button>
-            <button class="btn opt backspace-btn" onclick="handleInput('←')">⌫</button>
+            <button class="btn opt" onclick="handleInput('C')">CLS</button>
         </div>
     </div>
 
@@ -53,11 +55,9 @@
         <div class="screen-header"><button onclick="toggleScreen('settings-screen')">⬅ Back</button><h2>Settings</h2></div>
         <div class="setting-item"><label>Brightness</label><input type="range" min="10" max="100" value="100" oninput="updateBrightness(this.value)"></div>
     </div>
-
     <div id="history-screen" class="screen hidden">
         <div class="screen-header"><button onclick="toggleScreen('history-screen')">⬅ Back</button><h2>History</h2></div>
         <div id="history-list"></div>
-        <button class="clear-btn" onclick="clearHistory()">Clear All</button>
     </div>
 
     <script src="script.js"></script>
