@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Universal Calculator</title>
-<link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -27,7 +26,7 @@
             <button class="btn func" onclick="handleInput('/')">÷</button>
 
             <button class="btn func" onclick="handleInput('!')">x!</button>
-            <button class="btn func" onclick="handleInput('^')">xʸ</button>
+            <button class="btn func" onclick="handleInput('^')">^</button>
             <button class="btn func" onclick="handleInput('√')">√</button>
             <button class="btn func" onclick="handleInput('*')">×</button>
 
@@ -54,11 +53,11 @@
 
         <div id="history-panel" class="hidden">
             <div class="panel-header">
-                <span>Calculation History</span>
+                <span>History</span>
                 <button id="closeHistory">✕</button>
             </div>
             <div id="history-list"></div>
-            <button id="clearHistory">Clear All History</button>
+            <button id="clearHistory">Clear</button>
         </div>
     </div>
     <script src="script.js"></script>

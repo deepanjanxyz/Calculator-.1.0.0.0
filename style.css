@@ -1,105 +1,95 @@
 :root {
     --bg-color: #000000;
-    --card-bg: #1c1c1e;
-    --btn-bg: #2c2c2e;
+    --btn-bg: #1c1c1e;
     --btn-active: #3a3a3c;
     --orange: #ff9f0a;
     --text-white: #ffffff;
     --text-grey: #8e8e93;
 }
 
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+
 body {
     background-color: var(--bg-color);
     color: var(--text-white);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0; padding: 0;
+    height: 100vh; width: 100vw;
+    overflow: hidden; /* স্ক্রলবার বন্ধ */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    user-select: none;
 }
 
 .container {
-    width: 100%;
-    max-width: 400px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    box-sizing: border-box;
-    position: relative;
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    padding: 2vh 2vw;
+    background: black;
 }
 
-/* ডিসপ্লে ডিজাইন */
+/* ডিসপ্লে এরিয়া (উপরের ৩৫% জায়গা নেবে) */
 .display-area {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-end;
-    margin-bottom: 20px;
+    flex: 0 0 30%; /* ফিক্সড হাইট */
+    display: flex; flex-direction: column;
+    justify-content: flex-end; align-items: flex-end;
     padding: 10px;
+    border-bottom: 1px solid #333;
 }
 
-#history-preview { color: var(--text-grey); font-size: 1.2rem; margin-bottom: 5px; }
-#display { font-size: 3.5rem; font-weight: 300; line-height: 1.1; word-break: break-all; text-align: right; }
-#live-result { color: var(--text-grey); font-size: 1.5rem; margin-top: 5px; min-height: 30px; }
+#display { 
+    font-size: clamp(2rem, 10vw, 4rem); /* স্ক্রিন ছোট হলে ফন্ট ছোট হবে */
+    font-weight: 300; 
+    word-break: break-all; text-align: right; 
+}
+#live-result { color: var(--text-grey); font-size: clamp(1rem, 5vw, 1.5rem); min-height: 20px; }
 
 /* টুলস বার */
-.tools-bar { display: flex; justify-content: space-between; margin-bottom: 15px; }
-.tools-bar button {
-    background: transparent; border: none; color: var(--orange); font-size: 1.2rem; cursor: pointer; padding: 10px;
+.tools-bar { 
+    flex: 0 0 8%; 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 0 5px;
 }
+.tools-bar button { background: none; border: none; color: var(--orange); font-size: clamp(0.8rem, 4vw, 1rem); }
 .backspace { font-size: 1.5rem !important; color: #ff453a !important; }
 
-/* বাটন গ্রিড */
+/* বাটন গ্রিড (বাকি সব জায়গা নেবে) */
 .buttons {
+    flex: 1; /* বাকি সব জায়গা দখল করবে */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 2vmin; /* স্ক্রিন সাইজ অনুযায়ী গ্যাপ হবে */
 }
 
 .btn {
     background-color: var(--btn-bg);
     color: var(--text-white);
-    font-size: 1.5rem;
-    padding: 20px;
     border: none;
-    border-radius: 50%; /* গোল বাটন */
+    border-radius: 20%; /* একটু রাউন্ড শেপ */
+    font-size: clamp(1.2rem, 6vw, 1.8rem); /* ডায়নামিক ফন্ট */
     cursor: pointer;
+    display: flex; justify-content: center; align-items: center;
     transition: 0.1s;
-    aspect-ratio: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.btn:active { background-color: var(--btn-active); transform: scale(0.95); }
+.btn:active { background-color: var(--btn-active); transform: scale(0.9); }
 
-.opt { color: #5e5ce6; font-weight: 600; background: #2c2c2e; }
-.func { color: var(--orange); font-weight: 600; font-size: 1.3rem; }
-.num { font-weight: 400; font-size: 1.6rem; }
-
+.opt { color: #5e5ce6; font-weight: 600; }
+.func { color: var(--orange); font-weight: 600; }
 .equals {
     grid-row: span 2;
     background-color: var(--orange);
-    color: white;
-    border-radius: 35px;
-    aspect-ratio: auto; /* গোল নয়, লম্বাটে */
+    border-radius: 15px;
 }
 
-/* হিস্ট্রি প্যানেল */
+/* পপ-আপ মোডে হিস্ট্রি প্যানেল */
 #history-panel {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--card-bg); z-index: 10;
-    display: flex; flex-direction: column; padding: 20px; box-sizing: border-box;
+    background: rgba(0,0,0,0.95); z-index: 50;
+    display: flex; flex-direction: column; padding: 20px;
 }
-.hidden { display: none !important; }
-.panel-header { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.5rem; font-weight: bold; }
+.panel-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1.2rem; }
 #history-list { flex-grow: 1; overflow-y: auto; }
-.history-item { padding: 15px 0; border-bottom: 1px solid #38383a; text-align: right; }
-.history-expr { color: var(--text-grey); font-size: 1rem; }
-.history-res { color: var(--orange); font-size: 1.5rem; font-weight: bold; }
-#closeHistory { background: none; border: none; color: white; font-size: 1.5rem; }
-#clearHistory { background: #ff453a; color: white; border: none; padding: 15px; border-radius: 12px; margin-top: 10px; font-size: 1rem; }
+.history-item { padding: 10px; border-bottom: 1px solid #333; text-align: right; }
+.hidden { display: none !important; }
