@@ -1,43 +1,52 @@
 let currentInput = "0";
 let history = JSON.parse(localStorage.getItem('calcHistory')) || [];
 
-window.onload = () => {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.body.className = savedTheme + "-mode";
-    updateBrightness(localStorage.getItem('brightness') || 100);
-};
-
-function updateBrightness(val) {
-    const b = val / 100;
-    document.getElementById('app-overlay').style.backgroundColor = `rgba(0,0,0,${1 - b})`;
-    localStorage.setItem('brightness', val);
+// সায়েন্টিফিক ফাংশন
+function handleSci(op) {
+    try {
+        let val = parseFloat(currentInput);
+        if(op === 'sin') currentInput = Math.sin(val * Math.PI / 180).toFixed(4);
+        if(op === 'cos') currentInput = Math.cos(val * Math.PI / 180).toFixed(4);
+        if(op === 'tan') currentInput = Math.tan(val * Math.PI / 180).toFixed(4);
+        if(op === 'sqrt') currentInput = Math.sqrt(val).toString();
+        if(op === 'pow') currentInput += "**";
+        
+        document.getElementById('display').innerText = currentInput;
+        calculateLive();
+    } catch(e) { document.getElementById('display').innerText = "Error"; }
 }
 
 function handleInput(val) {
-    const display = document.getElementById('display');
+    const disp = document.getElementById('display');
     const live = document.getElementById('live-result');
 
-    if (val === 'C') { currentInput = "0"; live.innerText = ""; }
-    else if (val === '←') { currentInput = currentInput.length > 1 ? currentInput.slice(0, -1) : "0"; calculateLive(); }
-    else if (val === '=') { finalize(); }
-    else {
-        if (currentInput === "0" && !isNaN(val)) currentInput = val;
+    if(val === 'C') {
+        currentInput = "0";
+        live.innerText = "";
+    } else if(val === '←') {
+        currentInput = currentInput.length > 1 ? currentInput.slice(0, -1) : "0";
+        calculateLive();
+    } else if(val === '=') {
+        finalize();
+    } else {
+        if(currentInput === "0" && !isNaN(val)) currentInput = val;
         else currentInput += val;
         calculateLive();
     }
-    display.innerText = currentInput;
+    disp.innerText = currentInput;
 }
 
 function calculateLive() {
     try {
-        let res = eval(currentInput.replace(/×/g, '*').replace(/÷/g, '/'));
-        document.getElementById('live-result').innerText = (res !== undefined && res !== Infinity) ? res : "";
+        let cleanExpr = currentInput.replace(/×/g, '*').replace(/÷/g, '/');
+        let res = eval(cleanExpr);
+        document.getElementById('live-result').innerText = (res !== undefined && res !== Infinity) ? "= " + res : "";
     } catch { document.getElementById('live-result').innerText = ""; }
 }
 
 function finalize() {
-    const res = document.getElementById('live-result').innerText;
-    if(res) {
+    const res = document.getElementById('live-result').innerText.replace("= ", "");
+    if(res && !res.includes("Error")) {
         history.unshift(currentInput + " = " + res);
         currentInput = res;
         document.getElementById('live-result').innerText = "";
@@ -45,6 +54,10 @@ function finalize() {
     }
 }
 
-function toggleScreen(id) { document.getElementById(id).classList.toggle('hidden'); if(id==='history-screen') renderHistory(); }
-function renderHistory() { document.getElementById('history-list').innerHTML = history.map(h => `<div class="history-item">${h}</div>`).join(''); }
-function clearHistory() { history = []; localStorage.removeItem('calcHistory'); renderHistory(); }
+function updateBrightness(v) {
+    document.getElementById('app-overlay').style.backgroundColor = `rgba(0,0,0,${1 - v/100})`;
+}
+
+function toggleScreen(id) {
+    document.getElementById(id).classList.toggle('hidden');
+}
