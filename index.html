@@ -11,52 +11,50 @@
 </head>
 <body>
     <div class="container">
+        <div class="top-bar">
+            <button class="icon-btn" onclick="showHistory()">🕒 History</button>
+            <button class="icon-btn" onclick="handleInput('←')">⌫ Back</button>
+        </div>
+
         <div class="display-area">
             <div id="display">0</div>
             <div id="live-result"></div>
         </div>
 
-        <div class="tools-bar">
-            <button class="tool-btn" id="history-btn">🕒 History</button>
-            <button class="tool-btn" id="backspace-btn" data-val="←">⌫</button>
-        </div>
+        <div class="buttons-grid">
+            <button class="btn opt" onclick="handleInput('C')">C</button>
+            <button class="btn opt" onclick="handleInput('(')">(</button>
+            <button class="btn opt" onclick="handleInput(')')">)</button>
+            <button class="btn func" onclick="handleInput('/')">÷</button>
 
-        <div class="buttons">
-            <button class="btn opt">C</button>
-            <button class="btn opt">(</button>
-            <button class="btn opt">)</button>
-            <button class="btn func" data-val="/">÷</button>
+            <button class="btn num" onclick="handleInput('7')">7</button>
+            <button class="btn num" onclick="handleInput('8')">8</button>
+            <button class="btn num" onclick="handleInput('9')">9</button>
+            <button class="btn func" onclick="handleInput('*')">×</button>
 
-            <button class="btn num">7</button>
-            <button class="btn num">8</button>
-            <button class="btn num">9</button>
-            <button class="btn func" data-val="*">×</button>
+            <button class="btn num" onclick="handleInput('4')">4</button>
+            <button class="btn num" onclick="handleInput('5')">5</button>
+            <button class="btn num" onclick="handleInput('6')">6</button>
+            <button class="btn func" onclick="handleInput('-')">−</button>
 
-            <button class="btn num">4</button>
-            <button class="btn num">5</button>
-            <button class="btn num">6</button>
-            <button class="btn func">-</button>
+            <button class="btn num" onclick="handleInput('1')">1</button>
+            <button class="btn num" onclick="handleInput('2')">2</button>
+            <button class="btn num" onclick="handleInput('3')">3</button>
+            <button class="btn func" onclick="handleInput('+')">+</button>
 
-            <button class="btn num">1</button>
-            <button class="btn num">2</button>
-            <button class="btn num">3</button>
-            <button class="btn func">+</button>
-
-            <button class="btn num">%</button>
-            <button class="btn num zero-btn">0</button>
-            <button class="btn num">.</button>
-            <button class="btn equals">=</button>
+            <button class="btn num zero-btn" onclick="handleInput('0')">0</button>
+            <button class="btn num" onclick="handleInput('.')">.</button>
+            <button class="btn equals" onclick="handleInput('=')">=</button>
         </div>
     </div>
 
     <div id="history-panel">
-        <div style="display:flex; justify-content:space-between; color:white; margin-bottom:20px;">
+        <div class="panel-header">
             <span>History</span>
-            <button onclick="document.getElementById('history-panel').style.display='none'" style="color:red; background:none; border:none; font-size:1.5rem;">✕</button>
+            <button onclick="hideHistory()">✕</button>
         </div>
-        <div id="history-list" style="flex:1; overflow-y:auto; color:white;"></div>
+        <div id="history-list"></div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,28 +1,23 @@
-const display = document.getElementById('display');
-const liveResult = document.getElementById('live-result');
-const historyPanel = document.getElementById('history-panel');
-const historyList = document.getElementById('history-list');
-
 let currentInput = "0";
-let history = JSON.parse(localStorage.getItem('calcHistory')) || [];
+let history = [];
 
 function handleInput(val) {
+    const display = document.getElementById('display');
+    const live = document.getElementById('live-result');
+
     if (val === 'C') {
         currentInput = "0";
-        liveResult.innerText = "";
-    } 
-    else if (val === '←') {
+        live.innerText = "";
+    } else if (val === '←') {
         currentInput = currentInput.length > 1 ? currentInput.slice(0, -1) : "0";
         calculateLive();
-    } 
-    else if (val === '=') {
-        if (liveResult.innerText && liveResult.innerText !== "") {
-            saveToHistory(currentInput, liveResult.innerText);
-            currentInput = liveResult.innerText;
-            liveResult.innerText = "";
+    } else if (val === '=') {
+        if (live.innerText) {
+            history.unshift(currentInput + " = " + live.innerText);
+            currentInput = live.innerText;
+            live.innerText = "";
         }
-    }
-    else {
+    } else {
         if (currentInput === "0" && !isNaN(val)) currentInput = val;
         else currentInput += val;
         calculateLive();
@@ -32,49 +27,18 @@ function handleInput(val) {
 
 function calculateLive() {
     try {
-        let expr = currentInput.replace(/×/g, '*').replace(/÷/g, '/');
-        let res = eval(expr);
-        if (res !== undefined && !isNaN(res)) liveResult.innerText = res;
-        else liveResult.innerText = "";
-    } catch { liveResult.innerText = ""; }
+        let res = eval(currentInput.replace(/×/g, '*').replace(/÷/g, '/'));
+        document.getElementById('live-result').innerText = res !== undefined ? res : "";
+    } catch { document.getElementById('live-result').innerText = ""; }
 }
 
-function saveToHistory(expr, res) {
-    history.unshift({ expr, res });
-    if (history.length > 20) history.pop();
-    localStorage.setItem('calcHistory', JSON.stringify(history));
-    renderHistory();
+function showHistory() {
+    const panel = document.getElementById('history-panel');
+    const list = document.getElementById('history-list');
+    list.innerHTML = history.map(h => `<div style="padding:10px; border-bottom:1px solid #222;">${h}</div>`).join('');
+    panel.style.display = 'flex';
 }
 
-function renderHistory() {
-    historyList.innerHTML = history.map(item => `
-        <div class="history-item">
-            <div style="font-size: 0.9rem; color: #888;">${item.expr}</div>
-            <div style="font-size: 1.2rem; color: white;">= ${item.res}</div>
-        </div>
-    `).join('');
+function hideHistory() {
+    document.getElementById('history-panel').style.display = 'none';
 }
-
-// ইভেন্ট লিসেনারস (ফাস্ট রেসপন্স)
-document.querySelectorAll('.btn, .tool-btn').forEach(button => {
-    button.addEventListener('pointerdown', (e) => {
-        e.preventDefault();
-        let val = button.getAttribute('data-val') || button.innerText.replace('🕒 History', '');
-        if(val) handleInput(val);
-    });
-});
-
-document.getElementById('history-btn').addEventListener('click', () => {
-    renderHistory();
-    historyPanel.classList.remove('hidden');
-});
-
-document.getElementById('close-history').addEventListener('click', () => {
-    historyPanel.classList.add('hidden');
-});
-
-document.getElementById('clear-history').addEventListener('click', () => {
-    history = [];
-    localStorage.removeItem('calcHistory');
-    renderHistory();
-});

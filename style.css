@@ -1,53 +1,59 @@
 :root {
     --bg-color: #000000;
-    --btn-bg: #262626;
-    --orange: #ff9f0a;
-    --blue: #0a84ff;
+    --btn-num: #333333;
+    --btn-opt: #a5a5a5;
+    --btn-func: #ff9f0a;
     --text-white: #ffffff;
 }
 
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+* { box-sizing: border-box; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 
-body { background: var(--bg-color); margin: 0; font-family: sans-serif; height: 100vh; display: flex; flex-direction: column; }
+body { background: var(--bg-color); margin: 0; font-family: sans-serif; height: 100vh; display: flex; flex-direction: column; color: white; }
 
 .container { flex: 1; display: flex; flex-direction: column; padding: 20px; }
 
-/* ডিসপ্লে এরিয়া */
-.display-area { flex: 0 0 25%; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; }
-#display { font-size: clamp(3rem, 15vw, 5rem); color: white; word-break: break-all; margin-bottom: 5px; }
-#live-result { color: #888; font-size: 1.8rem; min-height: 30px; }
+/* উপরের হিস্ট্রি বার */
+.top-bar { display: flex; justify-content: space-between; padding-bottom: 10px; }
+.icon-btn { background: none; border: none; color: var(--btn-func); font-size: 1.1rem; cursor: pointer; }
 
-/* টুলস বার */
-.tools-bar { display: flex; justify-content: space-between; padding: 10px 0; margin-bottom: 10px; border-bottom: 1px solid #333; }
-.tool-btn { background: none; border: none; color: var(--orange); font-size: 1.2rem; cursor: pointer; }
+.display-area { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; padding: 20px 0; }
+#display { font-size: 4.5rem; word-break: break-all; }
+#live-result { color: #888; font-size: 1.8rem; height: 30px; }
 
-/* বাটন লেআউট - এবার একদম পারফেক্ট */
-.buttons { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+/* বাটন গ্রিড - ৫টা রো */
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
 
 .btn {
-    background: var(--btn-bg);
-    color: white; border: none;
-    border-radius: 50%; /* একদম গোল */
+    height: 75px;
+    border: none;
+    border-radius: 40px;
     font-size: 1.8rem;
-    display: flex; justify-content: center; align-items: center;
-    aspect-ratio: 1/1; /* হাইট আর উইডথ সমান রাখবে */
+    color: white;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
 }
 
-.btn:active { background: #444; }
+.num { background: var(--btn-num); }
+.opt { background: var(--btn-opt); color: black; }
+.func { background: var(--btn-func); font-weight: bold; }
+.equals { background: var(--btn-func); font-weight: bold; }
 
-/* ০ বাটন এবং ইকুয়াল বাটন স্পেশাল */
+/* স্পেশাল: ০ বাটন দুই কলাম জুড়ে বড় */
 .zero-btn {
     grid-column: span 2;
-    aspect-ratio: auto; /* ০ বাটনের গোল ভাব কাটানোর জন্য */
-    border-radius: 50px;
-    padding-left: 30px;
     justify-content: flex-start;
+    padding-left: 30px;
 }
 
-.equals { background: var(--orange); border-radius: 50px; aspect-ratio: auto; }
-.opt { color: var(--blue); background: #333; }
-.func { color: var(--orange); font-weight: bold; }
+.btn:active { opacity: 0.7; }
 
 /* হিস্ট্রি প্যানেল */
-#history-panel { position: fixed; bottom: 0; left: 0; right: 0; height: 75%; background: #1a1a1a; border-radius: 20px 20px 0 0; z-index: 1000; padding: 20px; display: none; flex-direction: column; box-shadow: 0 -5px 15px rgba(0,0,0,0.5); }
-.history-item { padding: 10px 0; border-bottom: 1px solid #333; text-align: right; }
+#history-panel {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); display: none; padding: 30px; flex-direction: column;
+}
+.panel-header { display: flex; justify-content: space-between; font-size: 1.5rem; border-bottom: 1px solid #333; padding-bottom: 10px; }
