@@ -1,97 +1,78 @@
 :root {
     --bg-color: #000000;
-    --btn-bg: #1c1c1e;
-    --btn-active: #3a3a3c;
+    --btn-bg: #222222;
+    --btn-active: #444444;
     --orange: #ff9f0a;
     --text-white: #ffffff;
-    --text-grey: #8e8e93;
+    --text-grey: #a0a0a0;
 }
 
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+* { 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; 
+    touch-action: manipulation; /* বাটন স্পিড বাড়াবে */
+}
 
 body {
     background-color: var(--bg-color);
-    color: var(--text-white);
-    font-family: 'Segoe UI', sans-serif;
     margin: 0; padding: 0;
     height: 100vh; width: 100vw;
     overflow: hidden;
     display: flex; justify-content: center; align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .container {
     width: 100%; height: 100%;
     display: flex; flex-direction: column;
-    padding: 10px;
-    background: black;
+    padding: 15px;
 }
 
 .display-area {
-    flex: 0 0 35%;
+    flex: 0 0 30%;
     display: flex; flex-direction: column;
     justify-content: flex-end; align-items: flex-end;
     padding: 10px;
-    border-bottom: 1px solid #333;
 }
 
 #display { 
-    font-size: clamp(3rem, 12vw, 5rem); 
-    font-weight: 300; 
-    word-break: break-all; text-align: right; 
+    font-size: clamp(3rem, 15vw, 6rem); 
+    color: white; word-break: break-all; text-align: right;
+    transition: all 0.1s ease; /* ফন্ট সাইজ চেঞ্জ স্মুথ হবে */
 }
-#live-result { color: var(--text-grey); font-size: clamp(1.2rem, 5vw, 2rem); min-height: 30px; }
 
-.tools-bar { 
-    flex: 0 0 8%; display: flex; justify-content: space-between; align-items: center; padding: 0 10px;
-}
-.tools-bar button { background: none; border: none; color: var(--orange); font-size: 1.2rem; }
-.backspace { font-size: 1.8rem !important; color: #ff453a !important; }
+#live-result { color: var(--text-grey); font-size: 1.5rem; min-height: 35px; }
 
 .buttons {
     flex: 1;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    gap: 10px;
-    padding-top: 10px;
+    gap: 12px;
 }
 
 .btn {
     background-color: var(--btn-bg);
     color: var(--text-white);
     border: none;
-    border-radius: 20px; /* রাউন্ডেড স্কয়ার */
-    font-size: clamp(1.5rem, 6vw, 2rem); /* ফন্ট বড় করা হয়েছে */
+    border-radius: 50%; /* একদম গোল আইফোন স্টাইল বাটন */
+    font-size: 1.8rem;
     cursor: pointer;
     display: flex; justify-content: center; align-items: center;
+    transition: background 0.1s; /* ক্লিক রেসপন্স ফাস্ট */
 }
 
-.btn:active { background-color: var(--btn-active); transform: scale(0.95); }
+.btn:active { background-color: var(--btn-active); }
 
-/* স্পেশাল বাটন ডিজাইন */
 .zero-btn {
-    grid-column: span 2; /* ০ বাটন এখন দ্বিগুণ বড় */
-    background-color: var(--btn-bg);
-    border-radius: 20px;
+    grid-column: span 2;
+    border-radius: 40px;
     justify-content: flex-start;
-    padding-left: 30px;
+    padding-left: 35px;
 }
 
-.equals {
-    grid-row: span 2;
-    background-color: var(--orange);
-}
+.equals { background-color: var(--orange); border-radius: 40px; }
+.opt { color: #5e5ce6; background: #333; }
+.func { color: var(--orange); font-size: 2rem; }
 
-.opt { color: #5e5ce6; font-weight: bold; background: #2c2c2e; }
-.func { color: var(--orange); font-weight: bold; font-size: 1.8rem; }
-
-/* হিস্ট্রি প্যানেল */
-#history-panel {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95); z-index: 50;
-    display: flex; flex-direction: column; padding: 20px;
-}
-.panel-header { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 1.5rem; }
-#history-list { flex-grow: 1; overflow-y: auto; }
-.history-item { padding: 15px; border-bottom: 1px solid #333; text-align: right; font-size: 1.2rem; }
-.hidden { display: none !important; }
+.hidden { display: none; }
