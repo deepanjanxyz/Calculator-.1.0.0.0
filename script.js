@@ -7,7 +7,16 @@ const brightnessOverlay = document.getElementById('brightness-overlay');
 
 let history = JSON.parse(localStorage.getItem('calcHistory')) || [];
 
-// সেটিংস হ্যান্ডলিং
+// ফ্যাক্টোরিয়াল ক্যালকুলেটর ফাংশন
+function factorial(n) {
+    if (n < 0) return "Error";
+    if (n === 0 || n === 1) return "1";
+    let res = BigInt(1);
+    for (let i = 2; i <= n; i++) res *= BigInt(i);
+    return res.toString();
+}
+
+// সেটিংস কন্ট্রোল
 document.getElementById('settingsBtn').onclick = () => settingsPanel.classList.remove('hidden');
 document.querySelectorAll('.close-btn').forEach(btn => {
     btn.onclick = () => {
@@ -16,31 +25,34 @@ document.querySelectorAll('.close-btn').forEach(btn => {
     }
 });
 
-// থিম ফিক্স
-document.getElementById('themeSelect').onchange = (e) => {
-    body.className = e.target.value + '-mode';
-};
+document.getElementById('themeSelect').onchange = (e) => body.className = e.target.value + '-mode';
 
-// ব্রাইটনেস লজিক ফিক্স (স্লাইডার বাড়ালে স্ক্রিন পরিষ্কার হবে)
+// ব্রাইটনেস লজিক (০ = অন্ধকার, ১ = উজ্জ্বল)
 document.getElementById('brightnessRange').oninput = (e) => {
-    // স্লাইডার ভ্যালু ০ (অন্ধকার) থেকে ০.৮ (উজ্জ্বল)
-    // আমরা অপাসিটি উল্টো করে দেব: ১ - ভ্যালু
     const val = parseFloat(e.target.value);
-    brightnessOverlay.style.opacity = 0.8 - val;
+    // অপাসিটি ১ মানে পুরা কালা, ০ মানে পুরা আলো
+    brightnessOverlay.style.opacity = 1 - val;
 };
 
-// কালার পিকার
 document.getElementById('colorPicker').oninput = (e) => {
     document.documentElement.style.setProperty('--primary-color', e.target.value);
 };
 
-// ক্যালকুলেশন লজিক
 document.querySelectorAll('.button').forEach(button => {
     button.addEventListener('click', (e) => handleInput(e.target.textContent));
 });
 
 function handleInput(value) {
     if (value === 'C') { display.textContent = '0'; liveResult.textContent = ''; }
+    else if (value === '!') {
+        let n = parseInt(display.textContent);
+        if(!isNaN(n)) {
+            let res = factorial(n);
+            saveHistory(n + "!", res);
+            display.textContent = res;
+            liveResult.textContent = '';
+        }
+    }
     else if (value === '=') {
         if (liveResult.textContent && liveResult.textContent !== 'Error') {
             saveHistory(display.textContent, liveResult.textContent);
@@ -53,7 +65,7 @@ function handleInput(value) {
         updateLiveResult();
     }
     else {
-        if (display.textContent === '0' || display.textContent === 'Error') display.textContent = value;
+        if (display.textContent === '0') display.textContent = value;
         else display.textContent += value;
         updateLiveResult();
     }
@@ -79,10 +91,4 @@ document.getElementById('historyBtn').onclick = () => {
     const list = document.getElementById('history-list');
     list.innerHTML = history.map(h => `<div class="history-item"><div>${h.expr}</div><div style="color:var(--primary-color)">= ${h.res}</div></div>`).join('');
     historyPanel.classList.remove('hidden');
-};
-
-document.getElementById('clearHistory').onclick = () => {
-    history = [];
-    localStorage.removeItem('calcHistory');
-    document.getElementById('history-list').innerHTML = '';
 };
